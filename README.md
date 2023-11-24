@@ -1,30 +1,5 @@
-# React + TypeScript + Vite
+# Self-Organizing Cells in React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an exploration into self-organizing behavior within React components, based on the classic cellular automata of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). The aim is to create a simulation where React components exhibit autonomous interactions and decision-making based on their surroundings.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+In this project, we'll be exploring how React components can simulate self-organizing behavior by perceiving and interacting with their neighboring components. Along the way we hope to delve into the principles of causality and information propagation, and see what sort of parallels we can draw with concepts from philosophy and physics.
