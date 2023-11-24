@@ -1,123 +1,189 @@
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import "./App.css"
 
-const DIMENSION = 35
+const FIRST_DIMENSION = 23
 const DEATH = 0
 const LIFE = 1
-const GEN = 80
+const T = 0
+const GENERATION = 80
 
-/** TODO:
-  combine spaceTim into a single data structure intead
-  of constructing it from space and time. probably an array of
-  bit strings ['0000'] or arrays [[0,0,0,0]] for each slice of time.
-  
-  progression will be handled by reading values (space) at indices (time), instead if setting state. 
-  
-  SpaceTime will call its own hook and publish its data
-  
-  Substrate will read and apply spaceTime 
-  
-  Controls will exist inside SpaceTime as well
-   */
 export default function GameOfLife() {
-  /** A concession must be made here. These hooks *should* be called in <SpaceTime>,
-   * but it would take some Bad React to share the necessary values with <Controls>.
-   * Pretend we aren't violating causality by hoisting the Mechanisms of space-time
-   * above the self-same substrate.
-   */
-  const [space, setSpace] = useSpace() // space is a series discrete bits
-  const [tick, setTick, flow, setFlow] = useTime()
-  useSpaceTime(space, setSpace, tick)
-
-  const violateCausality = (location, state) =>
-    setSpace((prev) => {
-      const next = [...prev]
-      next[location] = state
-      return next
-    })
-
   return (
     <div className='game'>
       <h1 className='title'>a game of life</h1>
       <SpaceTime>
-        {space.map((state, location) => (
-          <Cell
-            key={location}
-            state={state}
-            location={location}
-            death={() => violateCausality(location, DEATH)}
-            life={() => violateCausality(location, LIFE)}
-          />
-        ))}
+        {({ spaceTime, next, violateCausality }) => (
+          <>
+            <Substrate>
+              {spaceTime[T].map((state, event) => (
+                <Cell
+                  key={event}
+                  state={state}
+                  self={event}
+                  violateCausality={violateCausality}
+                />
+              ))}
+            </Substrate>
+            <Controls
+              next={next}
+              space={spaceTime[T]}
+              violateCausality={violateCausality}
+            />
+          </>
+        )}
       </SpaceTime>
-      <Controls
-        flow={flow}
-        space={space}
-        setFlow={setFlow}
-        setTick={setTick}
-        setSpace={setSpace}
-      />
     </div>
   )
+}
+
+type Space = number[]
+type SpaceTime = Space[]
+type SpaceTimeProperties = {
+  children: (props: {
+    spaceTime: SpaceTime
+    next: () => void
+    violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+  }) => React.ReactNode
+}
+type SpaceTimeState = {
+  spaceTime: SpaceTime
+  next: () => void
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+}
+
+const useSpaceTime = (firstDimension: number): SpaceTimeState => {
+  const [spaceTime, setSpaceTime] = useState(() =>
+    _initSpaceTime(firstDimension)
+  )
+
+  const next = () => {
+    const hereNow = spaceTime[T].map((state, event) => {
+      // event is the spatial location of the cell at the horizon of time
+      const localLifeForms = _observe(event, spaceTime[T])
+      if (state === DEATH && localLifeForms === 3) return LIFE
+      if (state === LIFE && localLifeForms > 3) return DEATH
+      if (state === LIFE && localLifeForms < 2) return DEATH
+      return state
+    })
+    setSpaceTime((spaceTime) => [hereNow, ...spaceTime])
+  }
+
+  return { spaceTime, next, violateCausality: setSpaceTime }
+}
+
+const _initSpaceTime = (firstDimension: number): SpaceTime => [
+  new Array(firstDimension * firstDimension).fill(DEATH),
+]
+
+const _observe = (event: number, space: Space) => {
+  const up = -FIRST_DIMENSION
+  const down = FIRST_DIMENSION
+  const left = -1
+  const right = 1
+
+  return [
+    space[event + up],
+    space[event + down],
+    space[event + left],
+    space[event + right],
+    space[event + up + left],
+    space[event + up + right],
+    space[event + down + left],
+    space[event + down + right],
+  ].filter(Boolean).length
 }
 
 /** Fundamental
  * causally closed layer (at least it *should* be)
  */
-const SpaceTime = ({ children }) => (
+const SpaceTime = ({ children }: SpaceTimeProperties) => {
+  const { spaceTime, next, violateCausality } = useSpaceTime(FIRST_DIMENSION)
+  return <>{children({ spaceTime, next, violateCausality })}</>
+}
+
+/** Existential phenomena
+ * cell is a model of how a bit of space interacts in this universe
+ */
+const Substrate = ({ children }: { children: React.ReactNode }) => (
   <div
     className='grid'
     style={{
-      gridTemplateColumns: `repeat(${DIMENSION}, 1rem)`,
-      gridTemplateRows: `repeat(${DIMENSION}, 1rem)`,
+      gridTemplateColumns: `repeat(${FIRST_DIMENSION}, 1rem)`,
+      gridTemplateRows: `repeat(${FIRST_DIMENSION}, 1rem)`,
     }}
   >
     {children}
   </div>
 )
 
-/** Existential phenomena
- * cell is a model of how a bit of space interacts in this universe
- */
-const Cell = ({ state, life, death }) => (
-  <button
-    className={`cell ${state ? "life" : "death"}`}
-    onClick={state ? death : life}
-    style={{ transition: `all ease-in-out ${GEN}` }}
-  />
-)
+type CellProperties = {
+  self: number
+  state: number
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+}
+
+const Cell = ({ self, state, violateCausality }: CellProperties) => {
+  const handleExistence = () =>
+    violateCausality((spaceTime) => {
+      const hereNow = [...spaceTime[T]]
+      hereNow[self] = state ? DEATH : LIFE
+      return [hereNow, ...spaceTime]
+    })
+  return (
+    <button
+      className={`cell ${state ? "life" : "death"}`}
+      onClick={handleExistence}
+      style={{ transition: `all ease-in-out ${GENERATION}` }}
+    />
+  )
+}
 
 /** God? Magic?
  * Symbolic causal violations
  */
-const Controls = ({ flow, setFlow, setTick, setSpace, space }) => {
-  const primordial = useRef(null)
+
+interface ControlsProperties {
+  next: VoidFunction
+  space: Space
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+}
+
+const Controls = ({ next, space, violateCausality }: ControlsProperties) => {
+  const [flow, setFlow] = useTimeControl({ next })
+  const primordial = useRef<Space | null>(null)
 
   const toggleFlow = () => {
     primordial.current = primordial.current ?? space
     setFlow((f) => !f)
   }
 
-  const reset = () => {
-    setFlow(false)
-    setSpace(primordial.current || initSpace(DIMENSION))
+  const handleReset = () => {
+    setFlow(false) // Stop any ongoing flow
+    // Reset the space to the initial state or create a new initial state
+    if (primordial.current) {
+      violateCausality([primordial.current])
+    } else {
+      violateCausality(_initSpaceTime(FIRST_DIMENSION))
+    }
   }
 
   const handleTick = () => {
-    setFlow(false)
+    if (flow) setFlow(false)
     if (!primordial?.current) primordial.current = space
-    setTick((t) => t + 1)
+    next()
   }
 
   const handleClear = () => {
     setFlow(false)
-    primordial.current = null
-    setSpace(() => initSpace(DIMENSION))
+    violateCausality(_initSpaceTime(FIRST_DIMENSION))
   }
 
-  const devoid = space.every((c) => c === DEATH)
-
-  if (devoid && primordial.current) setFlow(false)
+  const devoid = space.every((state: number) => state === DEATH)
+  useEffect(() => {
+    if (devoid && primordial.current) {
+      setFlow(false)
+    }
+  }, [devoid, primordial, setFlow])
 
   // TODO: stop flow if stasis is achieved
 
@@ -129,7 +195,7 @@ const Controls = ({ flow, setFlow, setTick, setSpace, space }) => {
       <button disabled={devoid} onClick={handleTick}>
         tick
       </button>
-      <button disabled={!primordial.current && devoid} onClick={reset}>
+      <button disabled={!primordial.current && devoid} onClick={handleReset}>
         reset
       </button>
       <button disabled={devoid} onClick={handleClear} className='destroy'>
@@ -139,57 +205,18 @@ const Controls = ({ flow, setFlow, setTick, setSpace, space }) => {
   )
 }
 
-/** Origin of Space */
-const initSpace = (d) => new Array(d * d).fill(DEATH)
-const useSpace = () => {
-  const [space, setSpace] = useState(() => initSpace(DIMENSION))
-  return [space, setSpace]
-}
-
-/** Origin of Time */
-const useTime = () => {
+const useTimeControl = ({
+  next,
+}: {
+  next: VoidFunction
+}): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [flow, setFlow] = useState(false)
-  const [tick, setTick] = useState(0)
 
   useEffect(() => {
-    let id
-    if (flow) {
-      id = setInterval(() => setTick((t) => t + 1), GEN)
-    }
+    let id: NodeJS.Timeout
+    if (flow) id = setInterval(next, GENERATION)
     return () => clearInterval(id)
-  }, [flow])
+  }, [flow, next])
 
-  return [tick, setTick, flow, setFlow]
-}
-
-/** Causal interaction of Space and Time */
-const useSpaceTime = (space, setSpace, tick) => {
-  useEffect(() => {
-    const next = space.map((state, location) => {
-      const localLifeForms = observe(location, space)
-      if (state === DEATH && localLifeForms === 3) return LIFE
-      if (state === LIFE && localLifeForms > 3) return DEATH
-      if (state === LIFE && localLifeForms < 2) return DEATH
-      return state
-    })
-    setSpace(next)
-  }, [tick])
-}
-
-const observe = (location, space) => {
-  const up = -DIMENSION
-  const down = DIMENSION
-  const left = -1
-  const right = 1
-
-  return [
-    space[location + up],
-    space[location + down],
-    space[location + left],
-    space[location + right],
-    space[location + up + left],
-    space[location + up + right],
-    space[location + down + left],
-    space[location + down + right],
-  ].filter(Boolean).length
+  return [flow, setFlow]
 }
