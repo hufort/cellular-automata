@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
 import "./App.css"
+import type {
+  SpaceTimeState,
+  Space,
+  SpaceTime,
+  SpaceTimeProperties,
+  CellProperties,
+  ControlProperties,
+} from "./types"
 
 const FIRST_DIMENSION = 23
 const DEATH = 0
@@ -7,7 +15,7 @@ const LIFE = 1
 const T = 0
 const GENERATION = 80
 
-export default function GameOfLife() {
+export default function Universe() {
   return (
     <div className='game'>
       <h1 className='title'>a game of life</h1>
@@ -36,21 +44,10 @@ export default function GameOfLife() {
   )
 }
 
-type Space = number[]
-type SpaceTime = Space[]
-type SpaceTimeProperties = {
-  children: (props: {
-    spaceTime: SpaceTime
-    next: () => void
-    violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
-  }) => React.ReactNode
-}
-type SpaceTimeState = {
-  spaceTime: SpaceTime
-  next: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
-}
-
+/**
+ * The function from which the universe is born.
+ *
+ */
 const useSpaceTime = (firstDimension: number): SpaceTimeState => {
   const [spaceTime, setSpaceTime] = useState(() =>
     _initSpaceTime(firstDimension)
@@ -94,7 +91,10 @@ const _observe = (event: number, space: Space) => {
 }
 
 /** Fundamental
- * causally closed layer (at least it *should* be)
+ *
+ * Spacetime is a causally closed layer. The only thing that can change the state of the universe
+ * is the universe itself (by way of render props, of course).
+ *
  */
 const SpaceTime = ({ children }: SpaceTimeProperties) => {
   const { spaceTime, next, violateCausality } = useSpaceTime(FIRST_DIMENSION)
@@ -102,7 +102,11 @@ const SpaceTime = ({ children }: SpaceTimeProperties) => {
 }
 
 /** Existential phenomena
- * cell is a model of how a bit of space interacts in this universe
+ *
+ * Substrate is the spatial constraint of the universe.
+ *
+ * Cell is a model of how a bit of space interacts within this contraint.
+ *
  */
 const Substrate = ({ children }: { children: React.ReactNode }) => (
   <div
@@ -115,12 +119,6 @@ const Substrate = ({ children }: { children: React.ReactNode }) => (
     {children}
   </div>
 )
-
-type CellProperties = {
-  self: number
-  state: number
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
-}
 
 const Cell = ({ self, state, violateCausality }: CellProperties) => {
   const handleExistence = () =>
@@ -138,17 +136,28 @@ const Cell = ({ self, state, violateCausality }: CellProperties) => {
   )
 }
 
-/** God? Magic?
- * Symbolic causal violations
+/** Symbolic causal violations
+ *
+ *   God? Magic?
+ *
  */
-
-interface ControlsProperties {
+const useTimeControl = ({
+  next,
+}: {
   next: VoidFunction
-  space: Space
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+}): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
+  const [flow, setFlow] = useState(false)
+
+  useEffect(() => {
+    let id: NodeJS.Timeout
+    if (flow) id = setInterval(next, GENERATION)
+    return () => clearInterval(id)
+  }, [flow, next])
+
+  return [flow, setFlow]
 }
 
-const Controls = ({ next, space, violateCausality }: ControlsProperties) => {
+const Controls = ({ next, space, violateCausality }: ControlProperties) => {
   const [flow, setFlow] = useTimeControl({ next })
   const primordial = useRef<Space | null>(null)
 
@@ -158,17 +167,14 @@ const Controls = ({ next, space, violateCausality }: ControlsProperties) => {
   }
 
   const handleReset = () => {
-    setFlow(false) // Stop any ongoing flow
-    // Reset the space to the initial state or create a new initial state
-    if (primordial.current) {
-      violateCausality([primordial.current])
-    } else {
-      violateCausality(_initSpaceTime(FIRST_DIMENSION))
-    }
+    setFlow(false)
+    return primordial.current
+      ? violateCausality([primordial.current])
+      : violateCausality(_initSpaceTime(FIRST_DIMENSION))
   }
 
   const handleTick = () => {
-    if (flow) setFlow(false)
+    setFlow(false)
     if (!primordial?.current) primordial.current = space
     next()
   }
@@ -203,20 +209,4 @@ const Controls = ({ next, space, violateCausality }: ControlsProperties) => {
       </button>
     </div>
   )
-}
-
-const useTimeControl = ({
-  next,
-}: {
-  next: VoidFunction
-}): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
-  const [flow, setFlow] = useState(false)
-
-  useEffect(() => {
-    let id: NodeJS.Timeout
-    if (flow) id = setInterval(next, GENERATION)
-    return () => clearInterval(id)
-  }, [flow, next])
-
-  return [flow, setFlow]
 }
