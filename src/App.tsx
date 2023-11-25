@@ -6,7 +6,7 @@ import { T } from "./constants"
 
 export default function Universe() {
   return (
-    <div className='game'>
+    <div className='universe'>
       <h1 className='title'>a game of life</h1>
       <SpaceTime>
         {({ spaceTime, next, violateCausality }) => (
