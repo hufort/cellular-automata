@@ -13,13 +13,13 @@ export const TimeController = ({
   const primordial = useRef<Space | null>(null)
 
   const toggleFlow = () => {
-    primordial.current = primordial.current ?? space
+    primordial.current = space
     setFlow((f) => !f)
   }
 
   const handleReset = () => {
     setFlow(false)
-    return primordial.current
+    primordial.current
       ? violateCausality([primordial.current])
       : violateCausality(initSpaceTime(FIRST_DIMENSION))
   }
