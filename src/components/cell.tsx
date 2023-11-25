@@ -9,7 +9,7 @@ import { CellProperties } from "../types"
  *
  */
 export const Cell = ({ self, state, violateCausality }: CellProperties) => {
-  const handleExistence = () =>
+  const toggleExistence = () =>
     violateCausality((spaceTime) => {
       const hereNow = [...spaceTime[T]]
       hereNow[self] = state ? DEATH : LIFE
@@ -18,8 +18,8 @@ export const Cell = ({ self, state, violateCausality }: CellProperties) => {
   return (
     <button
       className={`cell ${state ? "life" : "death"}`}
-      onClick={handleExistence}
-      style={{ transition: `all ease-in-out ${GENERATION}` }}
+      onClick={toggleExistence}
+      style={{ transition: `all ease-in-out ${GENERATION}ms` }}
     />
   )
 }
