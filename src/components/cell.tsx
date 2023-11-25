@@ -5,7 +5,7 @@ import { CellProperties } from "../types"
  * Emergent phenomenon
  *
  * Cell is a model of how a bit of space interacts within
- * the spacial constraint of the SpaceTime Substrate.
+ * the spatial constraint of the SpaceTime Substrate.
  *
  */
 export const Cell = ({ self, state, violateCausality }: CellProperties) => {
