@@ -1,27 +1,27 @@
 export type Space = number[]
-export type SpaceTime = Space[]
+export type SpaceTimeStructure = Space[]
 
 export interface SpaceTimeProperties {
   children: (props: {
-    spaceTime: SpaceTime
+    spaceTime: SpaceTimeStructure
     next: () => void
-    violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+    violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
   }) => React.ReactNode
 }
 export interface SpaceTimeState {
-  spaceTime: SpaceTime
+  spaceTime: SpaceTimeStructure
   next: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
 }
 
 export interface CellProperties {
   self: number
   state: number
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
 }
 
 export interface ControlProperties {
   next: VoidFunction
   space: Space
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTime>>
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
 }
