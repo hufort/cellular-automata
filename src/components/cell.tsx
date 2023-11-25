@@ -19,7 +19,7 @@ export const Cell = ({ self, state, violateCausality }: CellProperties) => {
     <button
       className={`cell ${state ? "life" : "death"}`}
       onClick={toggleExistence}
-      style={{ transition: `all ease-in-out ${GENERATION}` }}
+      style={{ transition: `all ease-in-out ${GENERATION}ms` }}
     />
   )
 }
