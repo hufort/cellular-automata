@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { GENERATION } from "../constants"
 
-export const useTimeControl = ({
+export const useTimeFlow = ({
   next,
 }: {
   next: VoidFunction

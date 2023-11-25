@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
-import { useTimeControl } from "../hooks"
+import { useTimeFlow } from "../hooks"
 import { ControlProperties, Space } from "../types"
 import { initSpaceTime } from "../utils"
 
-export const Causality = ({
+export const TimeController = ({
   next,
   space,
   violateCausality,
 }: ControlProperties) => {
-  const [flow, setFlow] = useTimeControl({ next })
+  const [flow, setFlow] = useTimeFlow({ next })
   const primordial = useRef<Space | null>(null)
 
   const toggleFlow = () => {

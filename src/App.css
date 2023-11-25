@@ -48,7 +48,7 @@ h6 {
   width: 100%;
 }
 
-.game {
+.universe {
   background: hsl(222deg 47% 13%)
     linear-gradient(28deg, hsl(222deg 47% 4%), transparent);
   height: 100vh;

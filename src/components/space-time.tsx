@@ -4,8 +4,9 @@ import { SpaceTimeProperties } from "../types"
 
 /** Fundamental
  *
- * Spacetime is a causally closed layer. The only thing that can change the state of the universe
- * is the universe itself (by way of render props, of course).
+ * Spacetime is a causally closed layer. The only thing that can
+ * change the state of the universe is the universe itself
+ * (by way of render props, of course).
  *
  */
 export const SpaceTime = ({ children }: SpaceTimeProperties) => {
