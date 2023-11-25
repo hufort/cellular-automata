@@ -9,7 +9,7 @@ export const TimeController = ({
   space,
   violateCausality,
 }: ControlProperties) => {
-  const [flow, setFlow] = useTimeFlow({ next })
+  const [flow, setFlow] = useTimeFlow(next)
   const primordial = useRef<Space | null>(null)
 
   const toggleFlow = () => {
