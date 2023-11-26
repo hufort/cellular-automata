@@ -1,13 +1,19 @@
 import "./App.css"
 
-import { SpaceTime, Cell, SpatialSubstrate, TimeController } from "./components"
+import {
+  SpaceTime,
+  Cell,
+  SpatialSubstrate,
+  TimeController,
+  Title,
+} from "./components"
 
 import { T } from "./constants"
 
 export default function Universe() {
   return (
     <div className='universe'>
-      <h1 className='title'>a game of life</h1>
+      <Title />
       <SpaceTime>
         {({ spaceTime, next, violateCausality }) => (
           <>

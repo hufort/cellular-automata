@@ -66,6 +66,17 @@ h6 {
   letter-spacing: 0.25rem;
 }
 
+.title a {
+  color: hsl(353deg 85% 61%);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.title a:hover {
+  color: hsl(353deg 75% 51%);
+}
+
 .grid {
   background: hsl(222deg 47% 15%)
     linear-gradient(180deg, hsl(222deg 47% 4%), transparent);
