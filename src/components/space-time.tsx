@@ -1,6 +1,14 @@
 import { FIRST_DIMENSION } from "../constants"
 import { useSpaceTime } from "../hooks"
-import { SpaceTimeProperties } from "../types"
+import { SpaceTimeStructure } from "../types"
+
+export interface SpaceTimeProperties {
+  children: (props: {
+    spaceTime: SpaceTimeStructure
+    next: () => void
+    violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
+  }) => React.ReactNode
+}
 
 /** Fundamental
  *

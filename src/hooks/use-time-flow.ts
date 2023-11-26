@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { GENERATION } from "../constants"
+import { GENERATION_MS } from "../constants"
 
 export const useTimeFlow = (
   next: VoidFunction
@@ -8,7 +8,7 @@ export const useTimeFlow = (
 
   useEffect(() => {
     let id: NodeJS.Timeout
-    if (flow) id = setInterval(next, GENERATION)
+    if (flow) id = setInterval(next, GENERATION_MS)
     return () => clearInterval(id)
   }, [flow, next])
 
