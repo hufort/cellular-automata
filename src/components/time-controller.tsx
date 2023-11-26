@@ -16,38 +16,45 @@ export const TimeController = ({
   violateCausality,
 }: ControlProperties) => {
   const [flow, setFlow] = useTimeFlow(next)
-  const primordial = useRef<Space | null>(null)
+  const slices = useRef<Space[]>([])
 
   const toggleFlow = () => {
-    primordial.current = space
+    if (!flow) {
+      slices.current.push(space)
+    }
     setFlow((f) => !f)
   }
 
   const handleReset = () => {
     setFlow(false)
-    primordial.current
-      ? violateCausality([primordial.current])
-      : violateCausality(initSpaceTime(FIRST_DIMENSION))
+    if (slices.current.length > 0) {
+      // Move backward in snapshots
+      const previousSpace = slices.current.pop()
+      previousSpace && violateCausality([previousSpace])
+    } else {
+      // Reset to initial state if no snapshots are left
+      violateCausality(initSpaceTime(FIRST_DIMENSION))
+    }
   }
 
   const handleTick = () => {
     setFlow(false)
-    primordial.current = primordial.current ?? space
+    slices.current.push(space)
     next()
   }
 
   const handleClear = () => {
     setFlow(false)
-    primordial.current = null
+    slices.current = []
     violateCausality(initSpaceTime(FIRST_DIMENSION))
   }
 
   const extinct = space.every((row) => row.every((cell) => cell === DEATH))
   useEffect(() => {
-    if (extinct && primordial.current) setFlow(false)
-  }, [extinct, primordial, setFlow])
+    if (extinct && slices.current.length > 0) setFlow(false)
+  }, [extinct, slices, setFlow])
 
-  // TODO: stop flow if stasis is achieved
+  // TODO: Implement functions to move forward in snapshots if needed
 
   return (
     <div className='controls'>
@@ -57,7 +64,10 @@ export const TimeController = ({
       <button disabled={extinct} onClick={handleTick}>
         tick
       </button>
-      <button disabled={extinct && !primordial.current} onClick={handleReset}>
+      <button
+        disabled={extinct && slices.current.length === 0}
+        onClick={handleReset}
+      >
         reset
       </button>
       <button disabled={extinct} onClick={handleClear} className='destroy'>
