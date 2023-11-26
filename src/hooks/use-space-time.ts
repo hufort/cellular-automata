@@ -1,7 +1,13 @@
 import { useState } from "react"
 import { LIFE, DEATH, T, FIRST_DIMENSION } from "../constants"
-import { Space, SpaceTimeState } from "../types"
+import { Space, SpaceTimeStructure } from "../types"
 import { initSpaceTime } from "../utils"
+
+export interface SpaceTimeState {
+  spaceTime: SpaceTimeStructure
+  next: () => void
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
+}
 
 /**
  * The function from which the universe is born.
@@ -14,82 +20,34 @@ export const useSpaceTime = (firstDimension: number): SpaceTimeState => {
   )
 
   const next = () => {
-    const hereNow = spaceTime[T].map((state, event) => {
-      const localLifeForms = _observe(event, spaceTime[T])
-      if (state === DEATH && localLifeForms === 3) return LIFE
-      if (state === LIFE && localLifeForms > 3) return DEATH
-      if (state === LIFE && localLifeForms < 2) return DEATH
-      return state
+    const currentSpace = spaceTime[T] // The current Space at time T
+    // Generate the next state of the space
+    const nextSpace = currentSpace.map((row, y) => {
+      return row.map((state, x) => {
+        const observed = _observe(y, x, currentSpace)
+        if (state === DEATH && observed === 3) return LIFE
+        if (state === LIFE && (observed < 2 || observed > 3)) return DEATH
+        return state
+      })
     })
-    setSpaceTime((spaceTime) => [hereNow, ...spaceTime])
+    setSpaceTime((spaceTime) => [nextSpace, ...spaceTime])
   }
 
   return { spaceTime, next, violateCausality: setSpaceTime }
 }
 
-const _observe = (event: number, space: Space) => {
-  const up = -FIRST_DIMENSION
-  const down = FIRST_DIMENSION
-  const left = -1
-  const right = 1
-
-  const offsets = []
-
-  if (event % FIRST_DIMENSION !== 0) offsets.push(left)
-  if ((event % FIRST_DIMENSION) + 1 !== FIRST_DIMENSION) offsets.push(right)
-  if (event >= FIRST_DIMENSION) offsets.push(up)
-  if (event < FIRST_DIMENSION ** 2 - FIRST_DIMENSION) offsets.push(down)
-
-  // Include diagonal offsets
-  if (event % FIRST_DIMENSION !== 0 && event >= FIRST_DIMENSION)
-    offsets.push(up + left)
-  if (
-    event % FIRST_DIMENSION !== 0 &&
-    event < FIRST_DIMENSION ** 2 - FIRST_DIMENSION
-  )
-    offsets.push(down + left)
-  if (
-    (event % FIRST_DIMENSION) + 1 !== FIRST_DIMENSION &&
-    event >= FIRST_DIMENSION
-  )
-    offsets.push(up + right)
-  if (
-    (event % FIRST_DIMENSION) + 1 !== FIRST_DIMENSION &&
-    event < FIRST_DIMENSION ** 2 - FIRST_DIMENSION
-  )
-    offsets.push(down + right)
-
-  const adjacentStates = offsets.map((offset) => {
-    const adjacentEvent = event + offset
-    return _adjacentEventExists(event, adjacentEvent)
-      ? space[adjacentEvent]
-      : DEATH
-  })
-
-  return adjacentStates.reduce((acc, state) => acc + state, 0)
-}
-
-const _adjacentEventExists = (event: number, adjacentEvent: number) => {
-  // adjacent event is less than the starting point
-  if (adjacentEvent < 0) {
-    console.log({ event, adjacentEvent })
-    return false
-  }
-  // adjacent event is greater than the ending point
-  if (adjacentEvent >= FIRST_DIMENSION ** 2) {
-    console.log({ event, adjacentEvent })
-    return false
-  }
-  // adjacent event exists, but is at the end of the previous row
-  if (event % FIRST_DIMENSION === 0 && adjacentEvent < event) {
-    console.log({ event, adjacentEvent })
-    return false
-  }
-  // adjacent event exists, but is at the beginning of the next row
-  if (event % FIRST_DIMENSION === FIRST_DIMENSION - 1) {
-    console.log({ event, adjacentEvent })
-    if (adjacentEvent > event) return false
-  }
-
-  return true
-}
+// prettier-ignore
+const _observe = (y: number, x: number, space: Space) =>
+  [
+    [-1, -1], [-1, 0], [-1, 1],
+    [ 0, -1], /*y,x*/  [ 0, 1],
+    [ 1, -1], [ 1, 0], [ 1, 1],
+  ].reduce((acc, [ox, oy]) => {
+    const otherY = y + oy
+    const otherX = x + ox
+    const inD1 = otherY >= 0 && otherY < FIRST_DIMENSION
+    const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
+    const inSpace = inD1 && inD2
+    const otherState = inSpace ? space[otherY][otherX] : null
+    return acc + (otherState === LIFE ? 1 : 0)
+  }, 0)

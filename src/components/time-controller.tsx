@@ -1,8 +1,14 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useTimeFlow } from "../hooks"
-import { ControlProperties, Space } from "../types"
+import { Space, SpaceTimeStructure } from "../types"
 import { initSpaceTime } from "../utils"
+
+export interface ControlProperties {
+  next: VoidFunction
+  space: Space
+  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
+}
 
 export const TimeController = ({
   next,
@@ -36,7 +42,7 @@ export const TimeController = ({
     violateCausality(initSpaceTime(FIRST_DIMENSION))
   }
 
-  const extinct = space.every((state: number) => state === DEATH)
+  const extinct = space.every((row) => row.every((cell) => cell === DEATH))
   useEffect(() => {
     if (extinct && primordial.current) setFlow(false)
   }, [extinct, primordial, setFlow])

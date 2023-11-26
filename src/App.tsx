@@ -12,14 +12,17 @@ export default function Universe() {
         {({ spaceTime, next, violateCausality }) => (
           <>
             <SpatialSubstrate>
-              {spaceTime[T].map((state, event) => (
-                <Cell
-                  key={event}
-                  state={state}
-                  self={event}
-                  violateCausality={violateCausality}
-                />
-              ))}
+              {spaceTime[T].map((row, y) =>
+                row.map((state, x) => (
+                  <Cell
+                    key={`${y}-${x}`}
+                    y={y}
+                    x={x}
+                    state={state}
+                    violateCausality={violateCausality}
+                  />
+                ))
+              )}
             </SpatialSubstrate>
             <TimeController
               next={next}
