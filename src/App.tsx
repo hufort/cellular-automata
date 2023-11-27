@@ -2,7 +2,7 @@ import "./App.css"
 
 import {
   SpaceTime,
-  Cell,
+  Particle,
   SpatialSubstrate,
   TimeController,
   Title,
@@ -17,10 +17,10 @@ export default function Universe() {
       <SpaceTime>
         {({ spaceTime, next, violateCausality }) => (
           <>
-            <SpatialSubstrate>
+            <SpatialSubstrate space={spaceTime[T]}>
               {spaceTime[T].map((row, y) =>
                 row.map((state, x) => (
-                  <Cell
+                  <Particle
                     key={`${y}-${x}`}
                     y={y}
                     x={x}

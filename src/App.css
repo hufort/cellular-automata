@@ -92,7 +92,7 @@ h6 {
     hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
 }
 
-.cell {
+.particle {
   appearance: none;
   border: none;
   background-color: hsl(217deg 32% 17%);
@@ -105,11 +105,11 @@ h6 {
   height: 100%;
 }
 
-.cell:hover {
+.particle:hover {
   background-color: #7dd3fc26;
 }
 
-.cell.life {
+.particle.life {
   background-color: hsl(0deg 0% 50%);
   box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
     hsl(0deg 0% 100% / 40%) 0px 0px 0px 0.075rem inset,

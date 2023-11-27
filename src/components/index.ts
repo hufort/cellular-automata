@@ -1,4 +1,4 @@
-export { Cell } from "./cell"
+export { Particle } from "./particle"
 export { SpaceTime } from "./space-time"
 export { SpatialSubstrate } from "./spatial-substrate"
 export { TimeController } from "./time-controller"
