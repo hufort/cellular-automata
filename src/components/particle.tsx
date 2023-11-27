@@ -1,7 +1,7 @@
 import { T, DEATH, LIFE, GENERATION_MS } from "../constants"
 import { SpaceTimeStructure } from "../types"
 
-export interface CellProperties {
+export interface ParticleProperties {
   y: number
   x: number
   state: number
@@ -15,18 +15,23 @@ export interface CellProperties {
  * the spatial constraint of the SpaceTime Substrate.
  *
  */
-export const Cell = ({ y, x, state, violateCausality }: CellProperties) => {
+export const Particle = ({
+  y,
+  x,
+  state,
+  violateCausality,
+}: ParticleProperties) => {
   const toggleExistence = () =>
     violateCausality((spaceTime) => {
-      const newSpace = [...spaceTime[T]] // next layer of space in time
-      newSpace[y] = [...newSpace[y]] // Copy the row to be modified
-      newSpace[y][x] = state ? DEATH : LIFE // Toggle the cell state
-      return [newSpace, ...spaceTime] // Return the new spaceTime
+      const newSpace = [...spaceTime[T]]
+      newSpace[y] = [...newSpace[y]]
+      newSpace[y][x] = state ? DEATH : LIFE
+      return [newSpace, ...spaceTime]
     })
 
   return (
     <button
-      className={`cell ${state ? "life" : "death"}`}
+      className={`particle ${state ? "life" : "death"}`}
       onClick={toggleExistence}
       style={{ transition: `all ease-in-out ${GENERATION_MS}ms` }}
     />
