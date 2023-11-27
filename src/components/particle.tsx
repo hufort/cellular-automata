@@ -9,12 +9,28 @@ export interface ParticleProperties {
 }
 
 /**
- * Emergent phenomenon
+ * Particle: A Model of Interaction in the Simulation.
  *
- * Cell is a model of how a bit of space interacts within
- * the spatial constraint of the SpaceTime Substrate.
+ * Each Particle represents an individual unit within the SpaceTime Substrate,
+ * Particle demonstrates how SpaceTime can interact with itself and change state.
+ * It symbolizes the spatial parameter of cosmic ecolution over time based off
+ * of the fundamental rules recursively applied to the initial state of the universe.
  *
+ * The 'toggleExistence' function, implements 'violateCausality', enabling a
+ * Particle to switch between states.
+ *
+ * While Particle operates within the deterministic rules of the simulation,
+ * 'violateCausality' is triggered by an external actor through an onClick event.
+ * This tongue in cheeck naming hints at a philosophical reflection on the concepts
+ * of determinism and free will. It raises questions about the role and influence
+ * of external forces on a seemingly closed system. God? Magic? onClick?
+ *
+ * Particle is a key component in our simulation, not just in modeling
+ * the dynamics of the universe, but also in offering a window into deeper
+ * philosophical explorations about the boundaries of influence and the interplay
+ * between deterministic systems and the theoretical consequences of external agency.
  */
+
 export const Particle = ({
   y,
   x,
