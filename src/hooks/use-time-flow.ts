@@ -4,6 +4,7 @@ import { GENERATION_MS } from "../constants"
 /**
  * useTimeFlow is the function that affords the ability
  * for time to flow.
+ *
  */
 
 export const useTimeFlow = (
