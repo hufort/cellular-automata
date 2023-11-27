@@ -17,7 +17,7 @@ export default function Universe() {
       <SpaceTime>
         {({ spaceTime, next, violateCausality }) => (
           <>
-            <SpatialSubstrate>
+            <SpatialSubstrate space={spaceTime[T]}>
               {spaceTime[T].map((row, y) =>
                 row.map((state, x) => (
                   <Cell

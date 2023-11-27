@@ -9,14 +9,16 @@ import { FIRST_DIMENSION } from "../constants"
 
 export const SpatialSubstrate = ({
   children,
+  space,
 }: {
   children: React.ReactNode
+  space: Space
 }) => (
   <div
     className='grid'
     style={{
-      gridTemplateColumns: `repeat(${FIRST_DIMENSION}, 1rem)`,
-      gridTemplateRows: `repeat(${FIRST_DIMENSION}, 1rem)`,
+      gridTemplateColumns: `repeat(${space[0].length}, 1rem)`,
+      gridTemplateRows: `repeat(${space.length}, 1rem)`,
     }}
   >
     {children}
