@@ -1,5 +1,3 @@
-import { FIRST_DIMENSION } from "../constants"
-
 /**
  * Emergent phenomenon
  *
@@ -9,14 +7,18 @@ import { FIRST_DIMENSION } from "../constants"
 
 export const SpatialSubstrate = ({
   children,
+  height,
+  width,
 }: {
   children: React.ReactNode
+  height: number
+  width: number
 }) => (
   <div
     className='grid'
     style={{
-      gridTemplateColumns: `repeat(${FIRST_DIMENSION}, 1rem)`,
-      gridTemplateRows: `repeat(${FIRST_DIMENSION}, 1rem)`,
+      gridTemplateColumns: `repeat(${width}, 1rem)`,
+      gridTemplateRows: `repeat(${height}, 1rem)`,
     }}
   >
     {children}

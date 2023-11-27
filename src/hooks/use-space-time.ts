@@ -37,7 +37,7 @@ export const useSpaceTime = (firstDimension: number): SpaceTimeState => {
 }
 
 // prettier-ignore
-const _observe = (y: number, x: number, space: Space) =>
+export const _observe = (y: number, x: number, space: Space) =>
   [
     [-1, -1], [-1, 0], [-1, 1],
     [ 0, -1], /*y,x*/  [ 0, 1],
