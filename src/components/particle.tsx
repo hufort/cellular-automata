@@ -41,10 +41,9 @@ export const Particle = ({
 }: ParticleProperties) => {
   const toggleExistence = () =>
     violateCausality((spaceTime) => {
-      const newSpace = [...spaceTime[T]]
-      newSpace[y] = [...newSpace[y]]
-      newSpace[y][x] = state ? DEATH : LIFE
-      return [newSpace, ...spaceTime]
+      const nextSpace = [...spaceTime[T]]
+      nextSpace[y][x] = state ? DEATH : LIFE
+      return [nextSpace, ...spaceTime]
     })
 
   return (
