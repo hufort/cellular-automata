@@ -2,7 +2,7 @@
   appearance: none;
   border: none;
   border-radius: 0.125rem;
-  background-color: hsl(217deg 20% 17%);
+  background: hsl(217deg 20% 17%);
   font-family: monospace;
   color: white;
   cursor: cell;

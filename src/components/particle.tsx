@@ -1,5 +1,6 @@
 import { T, DEATH, LIFE, GENERATION_MS } from "../constants"
 import { SpaceTimeStructure } from "../types"
+
 import "./particle.css"
 
 export interface ParticleProperties {
@@ -50,7 +51,9 @@ export const Particle = ({
     <button
       className={`particle ${state ? "life" : "death"}`}
       onClick={toggleExistence}
-      style={{ transition: `border-radius ease-in-out ${GENERATION_MS}ms` }}
+      style={{
+        transition: `border-radius ease-in-out ${GENERATION_MS}ms, border-radius ease-in-out ${GENERATION_MS}ms`,
+      }}
     />
   )
 }
