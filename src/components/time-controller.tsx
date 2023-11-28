@@ -4,6 +4,8 @@ import { useTimeFlow } from "../hooks"
 import { Space, SpaceTimeStructure } from "../types"
 import { initSpaceTime } from "../utils"
 
+import "./time-controller.css"
+
 export interface ControlProperties {
   next: VoidFunction
   space: Space
@@ -57,7 +59,7 @@ export const TimeController = ({
   // TODO: Implement functions to move forward in snapshots if needed
 
   return (
-    <div className='controls'>
+    <div className='time-controller'>
       <button disabled={extinct} onClick={toggleFlow}>
         {flow ? "stop" : "flow"}
       </button>

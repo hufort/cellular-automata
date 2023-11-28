@@ -1,5 +1,7 @@
 import { Space } from "../types"
 
+import "./spatial-substrate.css"
+
 /**
  * SpatialSubstrate: The Existential Grid of the Universe.
  *
@@ -32,7 +34,7 @@ export const SpatialSubstrate = ({
   space: Space
 }) => (
   <div
-    className='grid'
+    className='spatial-substrate'
     style={{
       gridTemplateColumns: `repeat(${space[0].length}, 1rem)`,
       gridTemplateRows: `repeat(${space.length}, 1rem)`,
