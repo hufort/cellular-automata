@@ -49,13 +49,12 @@ h6 {
 }
 
 .universe {
-  background: hsl(222deg 10% 13%)
-    linear-gradient(28deg, hsl(222deg 47% 4%), transparent);
+  background: hsl(222deg 10% 13%);
   height: 100vh;
   display: flex;
   align-items: center;
   gap: 32px;
   flex-direction: column;
   padding-top: 56px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
 }
