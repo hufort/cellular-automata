@@ -1,0 +1,11 @@
+:root {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: monospace;
+  background: var(--color-bg-base);
+  color: var(--color-fg-base);
+}

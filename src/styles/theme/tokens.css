@@ -1,17 +1,7 @@
-:root {
-  /* Base monochrome scale (dark mode) */
-  --mono-0: hsl(0, 0%, 0%);
-  --mono-10: hsl(0, 0%, 10%);
-  --mono-20: hsl(0, 0%, 20%);
-  --mono-30: hsl(0, 0%, 30%);
-  --mono-40: hsl(0, 0%, 40%);
-  --mono-50: hsl(0, 0%, 50%);
-  --mono-60: hsl(0, 0%, 60%);
-  --mono-70: hsl(0, 0%, 70%);
-  --mono-80: hsl(0, 0%, 80%);
-  --mono-90: hsl(0, 0%, 90%);
-  --mono-100: hsl(0, 0%, 100%);
+@import './colors.css';
 
+/* Dark theme (default) */
+:root {
   /* Semantic color mapping */
   --color-bg-base: var(--mono-10);
   --color-bg-surface: var(--mono-20);
@@ -31,13 +21,9 @@
   --color-accent-base: var(--mono-80);
   --color-accent-hover: var(--mono-90);
   --color-accent-muted: var(--mono-60);
-
-  /* System properties */
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light theme */
 @media (prefers-color-scheme: light) {
   :root {
     --color-bg-base: var(--mono-100);
@@ -57,51 +43,4 @@
     --color-accent-hover: var(--mono-10);
     --color-accent-muted: var(--mono-40);
   }
-}
-
-/* Reset styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-}
-
-body {
-  line-height: 1.5;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-#root,
-#__next {
-  isolation: isolate;
-  width: 100%;
 }
