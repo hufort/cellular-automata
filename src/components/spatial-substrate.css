@@ -1,5 +1,5 @@
 .spatial-substrate {
-  background: hsl(0, 0%, 13%);
+  background: var(--color-bg-surface);
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   overflow: auto;

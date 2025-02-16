@@ -1,3 +1,65 @@
+:root {
+  /* Base monochrome scale (dark mode) */
+  --mono-0: hsl(0, 0%, 0%);
+  --mono-10: hsl(0, 0%, 10%);
+  --mono-20: hsl(0, 0%, 20%);
+  --mono-30: hsl(0, 0%, 30%);
+  --mono-40: hsl(0, 0%, 40%);
+  --mono-50: hsl(0, 0%, 50%);
+  --mono-60: hsl(0, 0%, 60%);
+  --mono-70: hsl(0, 0%, 70%);
+  --mono-80: hsl(0, 0%, 80%);
+  --mono-90: hsl(0, 0%, 90%);
+  --mono-100: hsl(0, 0%, 100%);
+
+  /* Semantic color mapping */
+  --color-bg-base: var(--mono-10);
+  --color-bg-surface: var(--mono-20);
+  --color-bg-elevated: var(--mono-30);
+  
+  --color-fg-base: var(--mono-90);
+  --color-fg-muted: var(--mono-70);
+  --color-fg-subtle: var(--mono-50);
+
+  /* Interactive states */
+  --color-interactive-base: var(--mono-30);
+  --color-interactive-hover: var(--mono-40);
+  --color-interactive-active: var(--mono-20);
+  --color-interactive-disabled: var(--mono-20);
+  
+  /* Accent colors */
+  --color-accent-base: var(--mono-80);
+  --color-accent-hover: var(--mono-90);
+  --color-accent-muted: var(--mono-60);
+
+  /* System properties */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-base: var(--mono-100);
+    --color-bg-surface: var(--mono-90);
+    --color-bg-elevated: var(--mono-80);
+    
+    --color-fg-base: var(--mono-10);
+    --color-fg-muted: var(--mono-30);
+    --color-fg-subtle: var(--mono-50);
+
+    --color-interactive-base: var(--mono-70);
+    --color-interactive-hover: var(--mono-60);
+    --color-interactive-active: var(--mono-80);
+    --color-interactive-disabled: var(--mono-80);
+    
+    --color-accent-base: var(--mono-20);
+    --color-accent-hover: var(--mono-10);
+    --color-accent-muted: var(--mono-40);
+  }
+}
+
+/* Reset styles */
 *,
 *::before,
 *::after {
@@ -6,12 +68,6 @@
 
 * {
   margin: 0;
-}
-
-:root {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {

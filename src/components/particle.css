@@ -1,7 +1,7 @@
 .particle {
   appearance: none;
   border: none;
-  background: hsl(0, 0%, 15%);
+  background: var(--color-bg-surface);
   cursor: cell;
   outline: none;
   padding: 0;
@@ -10,9 +10,9 @@
 }
 
 .particle:hover {
-  background: hsl(0, 0%, 25%);
+  background: var(--color-bg-elevated);
 }
 
 .particle.life {
-  background: hsl(0, 0%, 80%);
+  background: var(--color-accent-base);
 }
