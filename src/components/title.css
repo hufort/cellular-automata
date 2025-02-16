@@ -1,14 +1,14 @@
 .title {
-  color: hsl(0, 0%, 85%);
+  color: var(--color-fg-base);
   font-size: 1rem;
 }
 
 .title a {
-  color: hsl(0, 0%, 75%);
+  color: var(--color-fg-muted);
   cursor: pointer;
   text-decoration: none;
 }
 
 .title a:hover {
-  color: hsl(0, 0%, 90%);
+  color: var(--color-accent-hover);
 }

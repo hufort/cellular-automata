@@ -5,9 +5,9 @@
 
 .time-controller button {
   appearance: none;
-  background: hsl(0, 0%, 30%);
+  background: var(--color-interactive-base);
   border: none;
-  color: hsl(0, 0%, 98%);
+  color: var(--color-fg-base);
   cursor: pointer;
   font-family: monospace;
   font-size: 12px;
@@ -16,33 +16,33 @@
 }
 
 .time-controller button:hover {
-  background: hsl(0, 0%, 35%);
+  background: var(--color-interactive-hover);
 }
 
 .time-controller button:active {
-  background: hsl(0, 0%, 25%);
+  background: var(--color-interactive-active);
 }
 
 .time-controller button:disabled {
-  background: hsl(0, 0%, 20%);
-  color: hsl(0, 0%, 70%);
+  background: var(--color-interactive-disabled);
+  color: var(--color-fg-muted);
   cursor: not-allowed;
 }
 
 .time-controller button.destroy {
-  background: hsl(0, 0%, 40%);
+  background: var(--color-bg-elevated);
 }
 
 .time-controller button.destroy:hover {
-  background: hsl(0, 0%, 45%);
+  background: var(--color-interactive-hover);
 }
 
 .time-controller button.destroy:active {
-  background: hsl(0, 0%, 35%);
+  background: var(--color-interactive-active);
 }
 
 .time-controller button.destroy:disabled {
-  background: hsl(0, 0%, 25%);
-  color: hsl(0, 0%, 70%);
+  background: var(--color-interactive-disabled);
+  color: var(--color-fg-muted);
   cursor: not-allowed;
 }
