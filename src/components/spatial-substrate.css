@@ -1,9 +1,8 @@
 .spatial-substrate {
-  background: var(--color-bg-surface);
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   overflow: auto;
   display: grid;
   gap: 2px;
-  padding: 0.375rem;
+  padding: 0.15rem;
 }
