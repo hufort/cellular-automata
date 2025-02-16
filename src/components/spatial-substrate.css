@@ -1,14 +1,9 @@
 .spatial-substrate {
-  background: hsl(222deg 20% 15%)
-    linear-gradient(180deg, hsl(222deg 20% 4%), transparent);
+  background: hsl(222deg 20% 15%);
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   overflow: auto;
   display: grid;
   gap: 2px;
   padding: 0.375rem;
-  border-radius: 0.25rem;
-  box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
-    hsl(0deg 0% 100% / 20%) 0px 0px 0px 1px inset,
-    hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
 }
