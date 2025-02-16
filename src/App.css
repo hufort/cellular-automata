@@ -1,7 +1,7 @@
 @import './reset.css';
 
 .universe {
-  background: hsl(222deg 10% 13%);
+  background: hsl(0, 0%, 10%);
   height: 100vh;
   display: flex;
   align-items: center;

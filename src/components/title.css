@@ -1,14 +1,14 @@
 .title {
-  color: hsl(222deg 47% 85%);
+  color: hsl(0, 0%, 85%);
   font-size: 1rem;
 }
 
 .title a {
-  color: hsl(18, 65%, 62%);
+  color: hsl(0, 0%, 75%);
   cursor: pointer;
   text-decoration: none;
 }
 
 .title a:hover {
-  color: hsl(16, 64%, 52%);
+  color: hsl(0, 0%, 90%);
 }
