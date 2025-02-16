@@ -4,68 +4,45 @@
 }
 
 .time-controller button {
-  background-color: hsl(243deg 20% 40%);
+  appearance: none;
+  background: var(--color-interactive-base);
   border: none;
-  color: hsl(243deg 75% 98%);
-  padding: 6px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 600;
+  color: var(--color-fg-base);
   cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.2s, box-shadow 0.1s;
-  box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
-    hsl(0deg 0% 100% / 10%) 0px 0px 0px 1px inset,
-    hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
+  font-family: monospace;
+  font-size: 12px;
+  outline: none;
+  padding: 6px 12px;
 }
 
 .time-controller button:hover {
-  background-color: hsl(243deg 20% 45%);
-  box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
-    hsl(0deg 0% 100% / 20%) 0px 0px 0px 1px inset,
-    hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
+  background: var(--color-interactive-hover);
 }
 
 .time-controller button:active {
-  background-color: hsl(243deg 28% 40%);
-  transform: translateY(0.5px);
+  background: var(--color-interactive-active);
 }
 
 .time-controller button:disabled {
-  background-color: hsl(243deg 25% 30%);
-  color: hsl(243deg 0% 70%);
+  background: var(--color-interactive-disabled);
+  color: var(--color-fg-muted);
   cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.8;
 }
 
 .time-controller button.destroy {
-  background-color: hsl(16, 64%, 52%);
-  box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
-    hsl(0deg 0% 100% / 10%) 0px 0px 0px 1px inset,
-    hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
-  color: hsl(243deg 75% 98%);
+  background: var(--color-bg-elevated);
 }
 
 .time-controller button.destroy:hover {
-  background-color: hsl(16, 64%, 55%);
-  box-shadow: hsl(0deg 0% 100%) 0px 0px 0px 0px inset,
-    hsl(0deg 0% 100% / 20%) 0px 0px 0px 1px inset,
-    hsl(0deg 0% 0% / 0%) 0px 0px 0px 0px;
+  background: var(--color-interactive-hover);
 }
 
 .time-controller button.destroy:active {
-  background-color: hsl(16, 64%, 49%);
-  transform: translateY(0.5px);
+  background: var(--color-interactive-active);
 }
 
 .time-controller button.destroy:disabled {
-  background-color: hsl(16, 64%, 32%);
-  color: hsl(353deg 0% 70%);
+  background: var(--color-interactive-disabled);
+  color: var(--color-fg-muted);
   cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.6;
 }

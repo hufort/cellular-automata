@@ -1,0 +1,6 @@
+/* Theme */
+@import './theme/tokens.css';
+
+/* Base styles */
+@import './base/reset.css';
+@import './base/global.css';
