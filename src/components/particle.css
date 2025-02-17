@@ -1,18 +1,28 @@
 .particle {
   appearance: none;
   border: none;
-  background: var(--color-bg-surface);
+  background: var(--color-bg-base);
   cursor: cell;
   outline: none;
   padding: 0;
   width: 100%;
   height: 100%;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
 .particle:hover {
   background: var(--color-bg-elevated);
+  box-shadow: var(--elevation-medium);
+  transform: translateZ(0);
 }
 
 .particle.life {
   background: var(--color-accent-base);
+  box-shadow: var(--elevation-high);
+}
+
+.particle.life:hover {
+  box-shadow: var(--glow-high), 0 0 0 1px var(--border-medium);
 }

@@ -6,17 +6,17 @@
   --color-bg-base: var(--mono-10);
   --color-bg-surface: var(--mono-20);
   --color-bg-elevated: var(--mono-30);
-  
+
   --color-fg-base: var(--mono-90);
   --color-fg-muted: var(--mono-70);
   --color-fg-subtle: var(--mono-50);
 
   /* Interactive states */
-  --color-interactive-base: var(--mono-30);
-  --color-interactive-hover: var(--mono-40);
-  --color-interactive-active: var(--mono-20);
-  --color-interactive-disabled: var(--mono-20);
-  
+  --color-interactive-base: var(--mono-10);
+  --color-interactive-hover: var(--mono-20);
+  --color-interactive-active: var(--mono-30);
+  --color-interactive-disabled: var(--mono-30);
+
   /* Accent colors */
   --color-accent-base: var(--mono-80);
   --color-accent-hover: var(--mono-90);
@@ -29,16 +29,16 @@
     --color-bg-base: var(--mono-100);
     --color-bg-surface: var(--mono-90);
     --color-bg-elevated: var(--mono-80);
-    
+
     --color-fg-base: var(--mono-10);
     --color-fg-muted: var(--mono-30);
     --color-fg-subtle: var(--mono-50);
 
-    --color-interactive-base: var(--mono-70);
-    --color-interactive-hover: var(--mono-60);
+    --color-interactive-base: var(--mono-100);
+    --color-interactive-hover: var(--mono-90);
     --color-interactive-active: var(--mono-80);
     --color-interactive-disabled: var(--mono-80);
-    
+
     --color-accent-base: var(--mono-20);
     --color-accent-hover: var(--mono-10);
     --color-accent-muted: var(--mono-40);

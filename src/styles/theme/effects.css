@@ -1,0 +1,59 @@
+/* Effect tokens for consistent layering and glow effects */
+:root {
+  /* Alpha channels for layering */
+  --alpha-subtle: 0.05;
+  --alpha-low: 0.1;
+  --alpha-medium: 0.2;
+  --alpha-high: 0.3;
+  --alpha-max: 0.4;
+
+  /* Blur radii */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 12px;
+  --blur-xl: 16px;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, var(--alpha-subtle));
+  --border-low: rgba(255, 255, 255, var(--alpha-low));
+  --border-medium: rgba(255, 255, 255, var(--alpha-medium));
+
+  /* Glow effects */
+  --glow-subtle: 0 0 var(--blur-sm) rgba(255, 255, 255, var(--alpha-subtle));
+  --glow-low: 0 0 var(--blur-md) rgba(255, 255, 255, var(--alpha-low));
+  --glow-medium: 0 0 var(--blur-lg) rgba(255, 255, 255, var(--alpha-medium));
+  --glow-high: 0 0 var(--blur-xl) rgba(255, 255, 255, var(--alpha-high));
+
+  /* Text effects */
+  --text-glow-subtle: 0 0 var(--blur-sm) rgba(255, 255, 255, var(--alpha-low));
+  --text-glow-medium: 0 0 var(--blur-md) rgba(255, 255, 255, var(--alpha-medium));
+  --text-glow-high: 0 0 var(--blur-lg) rgba(255, 255, 255, var(--alpha-high));
+
+  /* Composite effects */
+  --elevation-low: var(--glow-subtle), 0 0 0 1px var(--border-subtle);
+
+  --elevation-medium: var(--glow-low), 0 0 0 1px var(--border-low);
+
+  --elevation-high: var(--glow-medium), 0 0 0 1px var(--border-medium);
+}
+
+/* Light mode variants */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Borders */
+    --border-subtle: rgba(0, 0, 0, var(--alpha-subtle));
+    --border-low: rgba(0, 0, 0, var(--alpha-low));
+    --border-medium: rgba(0, 0, 0, var(--alpha-medium));
+
+    /* Glow effects */
+    --glow-subtle: 0 0 var(--blur-sm) rgba(0, 0, 0, var(--alpha-subtle));
+    --glow-low: 0 0 var(--blur-md) rgba(0, 0, 0, var(--alpha-low));
+    --glow-medium: 0 0 var(--blur-lg) rgba(0, 0, 0, var(--alpha-medium));
+    --glow-high: 0 0 var(--blur-xl) rgba(0, 0, 0, var(--alpha-high));
+
+    /* Text effects */
+    --text-glow-subtle: 0 0 var(--blur-sm) rgba(0, 0, 0, var(--alpha-low));
+    --text-glow-medium: 0 0 var(--blur-md) rgba(0, 0, 0, var(--alpha-medium));
+    --text-glow-high: 0 0 var(--blur-lg) rgba(0, 0, 0, var(--alpha-high));
+  }
+}
