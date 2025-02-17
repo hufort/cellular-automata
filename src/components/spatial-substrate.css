@@ -1,8 +1,25 @@
 .spatial-substrate {
+  position: relative;
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   overflow: auto;
   display: grid;
   gap: 2px;
   padding: 0.15rem;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  box-shadow: var(--elevation-low);
+}
+
+/* Scan line effect */
+.spatial-substrate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 2;
 }

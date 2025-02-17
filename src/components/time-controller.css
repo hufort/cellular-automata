@@ -6,7 +6,7 @@
 .time-controller button {
   appearance: none;
   background: var(--color-interactive-base);
-  border: none;
+  border: 1px solid var(--border-low);
   color: var(--color-fg-base);
   cursor: pointer;
   font-family: monospace;
@@ -14,36 +14,56 @@
   outline: none;
   padding: 6px 12px;
   border-radius: 2px;
+  position: relative;
+  transition: all 0.2s ease;
+  text-shadow: var(--text-glow-medium);
 }
 
 .time-controller button:hover {
   background: var(--color-interactive-hover);
+  box-shadow: var(--elevation-medium);
+  text-shadow: var(--text-glow-high);
 }
 
 .time-controller button:active {
   background: var(--color-interactive-active);
+  box-shadow: var(--elevation-low);
+  text-shadow: none;
+  transform: translateY(1px);
 }
 
 .time-controller button:disabled {
   background: var(--color-interactive-disabled);
   color: var(--color-fg-muted);
   cursor: not-allowed;
+  border-color: var(--border-subtle);
+  box-shadow: none;
+  text-shadow: none;
 }
 
 .time-controller button.destroy {
   background: var(--color-bg-elevated);
+  border-color: var(--border-medium);
 }
 
 .time-controller button.destroy:hover {
   background: var(--color-interactive-hover);
+  box-shadow: var(--elevation-high);
+  text-shadow: var(--text-glow-high);
 }
 
 .time-controller button.destroy:active {
   background: var(--color-interactive-active);
+  box-shadow: var(--elevation-medium);
+  text-shadow: none;
+  transform: translateY(1px);
 }
 
 .time-controller button.destroy:disabled {
   background: var(--color-interactive-disabled);
   color: var(--color-fg-muted);
   cursor: not-allowed;
+  border-color: var(--border-subtle);
+  box-shadow: none;
+  text-shadow: none;
 }
