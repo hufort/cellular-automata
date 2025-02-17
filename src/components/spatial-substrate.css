@@ -11,15 +11,3 @@
   border-radius: 2px;
   box-shadow: var(--elevation-low);
 }
-
-/* Scan line effect */
-.spatial-substrate::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%);
-  background-size: 100% 4px;
-  pointer-events: none;
-  opacity: 0.15;
-  z-index: 2;
-}
