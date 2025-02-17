@@ -1,7 +1,7 @@
 .particle {
   appearance: none;
   border: none;
-  background: var(--color-bg-surface);
+  background: var(--color-bg-base);
   cursor: cell;
   outline: none;
   padding: 0;
@@ -24,7 +24,5 @@
 }
 
 .particle.life:hover {
-  box-shadow: 
-    var(--glow-high),
-    0 0 0 1px var(--border-medium);
+  box-shadow: var(--glow-high), 0 0 0 1px var(--border-medium);
 }

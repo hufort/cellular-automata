@@ -6,8 +6,7 @@
   display: grid;
   gap: 2px;
   padding: 0.15rem;
-  background: var(--color-bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 2px;
+  background: var(--color-bg-base);
   box-shadow: var(--elevation-low);
+  border-radius: 2px;
 }
