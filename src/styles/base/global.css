@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/arkitextura');
+
 :root {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -5,7 +7,7 @@
 }
 
 body {
-  font-family: monospace;
+  font-family: 'Arkitextura Regular', monospace;
   background: var(--color-bg-base);
   color: var(--color-fg-base);
 }
