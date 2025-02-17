@@ -1,4 +1,6 @@
 /* Theme */
+@import './theme/colors.css';
+@import './theme/effects.css';
 @import './theme/tokens.css';
 
 /* Base styles */
