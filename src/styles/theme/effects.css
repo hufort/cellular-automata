@@ -17,7 +17,7 @@
   --border-subtle: rgba(255, 255, 255, var(--alpha-subtle));
   --border-low: rgba(255, 255, 255, var(--alpha-low));
   --border-medium: rgba(255, 255, 255, var(--alpha-medium));
-  
+
   /* Glow effects */
   --glow-subtle: 0 0 var(--blur-sm) rgba(255, 255, 255, var(--alpha-subtle));
   --glow-low: 0 0 var(--blur-md) rgba(255, 255, 255, var(--alpha-low));
@@ -30,15 +30,30 @@
   --text-glow-high: 0 0 var(--blur-lg) rgba(255, 255, 255, var(--alpha-high));
 
   /* Composite effects */
-  --elevation-low: 
-    var(--glow-subtle),
-    0 0 0 1px var(--border-subtle);
-  
-  --elevation-medium: 
-    var(--glow-low),
-    0 0 0 1px var(--border-low);
-  
-  --elevation-high: 
-    var(--glow-medium),
-    0 0 0 1px var(--border-medium);
+  --elevation-low: var(--glow-subtle), 0 0 0 1px var(--border-subtle);
+
+  --elevation-medium: var(--glow-low), 0 0 0 1px var(--border-low);
+
+  --elevation-high: var(--glow-medium), 0 0 0 1px var(--border-medium);
+}
+
+/* Light mode variants */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Borders */
+    --border-subtle: rgba(0, 0, 0, var(--alpha-subtle));
+    --border-low: rgba(0, 0, 0, var(--alpha-low));
+    --border-medium: rgba(0, 0, 0, var(--alpha-medium));
+
+    /* Glow effects */
+    --glow-subtle: 0 0 var(--blur-sm) rgba(0, 0, 0, var(--alpha-subtle));
+    --glow-low: 0 0 var(--blur-md) rgba(0, 0, 0, var(--alpha-low));
+    --glow-medium: 0 0 var(--blur-lg) rgba(0, 0, 0, var(--alpha-medium));
+    --glow-high: 0 0 var(--blur-xl) rgba(0, 0, 0, var(--alpha-high));
+
+    /* Text effects */
+    --text-glow-subtle: 0 0 var(--blur-sm) rgba(0, 0, 0, var(--alpha-low));
+    --text-glow-medium: 0 0 var(--blur-md) rgba(0, 0, 0, var(--alpha-medium));
+    --text-glow-high: 0 0 var(--blur-lg) rgba(0, 0, 0, var(--alpha-high));
+  }
 }
