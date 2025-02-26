@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { LIFE, DEATH, T, FIRST_DIMENSION } from "../constants"
-import { Space, SpaceTimeStructure } from "../types"
-import { initSpaceTime } from "../utils"
+import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
+import { Space } from "../types"
+import { initSpace } from "../utils"
 
-export interface SpaceTimeState {
-  spaceTime: SpaceTimeStructure
+export interface SpaceState {
+  space: Space
   next: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
+  violateCausality: React.Dispatch<React.SetStateAction<Space>>
 }
 
 /**
@@ -26,13 +26,11 @@ export interface SpaceTimeState {
  *
  */
 
-export const useSpaceTime = (firstDimension: number): SpaceTimeState => {
-  const [spaceTime, setSpaceTime] = useState(() =>
-    initSpaceTime(firstDimension)
-  )
+export const useSpaceTime = (firstDimension: number): SpaceState => {
+  const [space, setSpace] = useState(() => initSpace(firstDimension))
 
   const next = () => {
-    const currentSpace = spaceTime[T]
+    const currentSpace = space
     const nextSpace = currentSpace.map((row, y) => {
       return row.map((state, x) => {
         const observed = _observe(y, x, currentSpace)
@@ -41,10 +39,10 @@ export const useSpaceTime = (firstDimension: number): SpaceTimeState => {
         return state
       })
     })
-    setSpaceTime((spaceTime) => [nextSpace, ...spaceTime])
+    setSpace(nextSpace)
   }
 
-  return { spaceTime, next, violateCausality: setSpaceTime }
+  return { space, next, violateCausality: setSpace }
 }
 
 /**

@@ -1,5 +1,5 @@
-import { T, DEATH, LIFE, GENERATION_MS } from "../constants"
-import { SpaceTimeStructure } from "../types"
+import { DEATH, LIFE, GENERATION_MS } from "../constants"
+import { SpaceState } from "../hooks/use-space-time"
 
 import "./particle.css"
 
@@ -7,7 +7,7 @@ export interface ParticleProperties {
   y: number
   x: number
   state: number
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
+  violateCausality: SpaceState["violateCausality"]
 }
 
 /**
@@ -41,9 +41,9 @@ export const Particle = ({
 }: ParticleProperties) => {
   const toggleExistence = () =>
     violateCausality((spaceTime) => {
-      const nextSpace = [...spaceTime[T]]
+      const nextSpace = [...spaceTime]
       nextSpace[y][x] = state ? DEATH : LIFE
-      return [nextSpace, ...spaceTime]
+      return nextSpace
     })
 
   return (

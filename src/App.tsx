@@ -1,27 +1,41 @@
-import './App.css';
+import "./App.css"
 
-import { SpaceTime, Particle, SpatialSubstrate, TimeController, Title } from './components';
-
-import { T } from './constants';
+import {
+  SpaceTime,
+  Particle,
+  SpatialSubstrate,
+  TimeController,
+  Title,
+} from "./components"
 
 export default function Universe() {
   return (
     <div className="universe grain">
       <Title />
       <SpaceTime>
-        {({ spaceTime, next, violateCausality }) => (
+        {({ space, next, violateCausality }) => (
           <>
-            <SpatialSubstrate space={spaceTime[T]}>
-              {spaceTime[T].map((row, y) =>
+            <SpatialSubstrate space={space}>
+              {space.map((row, y) =>
                 row.map((state, x) => (
-                  <Particle key={`${y}-${x}`} y={y} x={x} state={state} violateCausality={violateCausality} />
+                  <Particle
+                    key={`${y}-${x}`}
+                    y={y}
+                    x={x}
+                    state={state}
+                    violateCausality={violateCausality}
+                  />
                 ))
               )}
             </SpatialSubstrate>
-            <TimeController next={next} space={spaceTime[T]} violateCausality={violateCausality} />
+            <TimeController
+              next={next}
+              space={space}
+              violateCausality={violateCausality}
+            />
           </>
         )}
       </SpaceTime>
     </div>
-  );
+  )
 }

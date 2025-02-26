@@ -1,22 +1,23 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useTimeFlow } from "../hooks"
-import { Space, SpaceTimeStructure } from "../types"
-import { initSpaceTime } from "../utils"
+import { Space } from "../types"
+import { initSpace } from "../utils"
+import { type SpaceState } from "../hooks/use-space-time"
 
 import "./time-controller.css"
 
-export interface ControlProperties {
-  next: VoidFunction
-  space: Space
-  violateCausality: React.Dispatch<React.SetStateAction<SpaceTimeStructure>>
-}
+// export interface ControlProperties {
+//   next: VoidFunction
+//   space: Space
+//   violateCausality: React.Dispatch<React.SetStateAction<Space>>
+// }
 
 export const TimeController = ({
   next,
   space,
   violateCausality,
-}: ControlProperties) => {
+}: SpaceState) => {
   const [flow, setFlow] = useTimeFlow(next)
   const slices = useRef<Space[]>([])
 
@@ -32,10 +33,10 @@ export const TimeController = ({
     if (slices.current.length > 0) {
       // Move backward in snapshots
       const previousSpace = slices.current.pop()
-      previousSpace && violateCausality([previousSpace])
+      previousSpace && violateCausality(previousSpace)
     } else {
       // Reset to initial state if no snapshots are left
-      violateCausality(initSpaceTime(FIRST_DIMENSION))
+      violateCausality(initSpace(FIRST_DIMENSION))
     }
   }
 
@@ -48,7 +49,7 @@ export const TimeController = ({
   const handleClear = () => {
     setFlow(false)
     slices.current = []
-    violateCausality(initSpaceTime(FIRST_DIMENSION))
+    violateCausality(initSpace(FIRST_DIMENSION))
   }
 
   const extinct = space.every((row) => row.every((cell) => cell === DEATH))
@@ -59,7 +60,7 @@ export const TimeController = ({
   // TODO: Implement functions to move forward in snapshots if needed
 
   return (
-    <div className='time-controller'>
+    <div className="time-controller">
       <button disabled={extinct} onClick={toggleFlow}>
         {flow ? "stop" : "flow"}
       </button>
@@ -72,7 +73,7 @@ export const TimeController = ({
       >
         reset
       </button>
-      <button disabled={extinct} onClick={handleClear} className='destroy'>
+      <button disabled={extinct} onClick={handleClear} className="destroy">
         clear
       </button>
     </div>
