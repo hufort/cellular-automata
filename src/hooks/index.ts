@@ -1,2 +1,2 @@
-export { useSpaceTime } from "./use-space-time"
+export { useUniverse } from "./use-universe"
 export { useTimeFlow } from "./use-time-flow"

@@ -3,7 +3,7 @@ import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useTimeFlow } from "../hooks"
 import { Space } from "../types"
 import { initSpace } from "../utils"
-import { type SpaceState } from "../hooks/use-space-time"
+import { type Universe } from "../hooks/use-universe"
 
 import "./time-controller.css"
 
@@ -13,11 +13,7 @@ import "./time-controller.css"
 //   violateCausality: React.Dispatch<React.SetStateAction<Space>>
 // }
 
-export const TimeController = ({
-  next,
-  space,
-  violateCausality,
-}: SpaceState) => {
+export const TimeController = ({ next, space, violateCausality }: Universe) => {
   const [flow, setFlow] = useTimeFlow(next)
   const slices = useRef<Space[]>([])
 

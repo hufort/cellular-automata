@@ -3,14 +3,14 @@ import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
 import { Space } from "../types"
 import { initSpace } from "../utils"
 
-export interface SpaceState {
+export interface Universe {
   space: Space
   next: () => void
   violateCausality: React.Dispatch<React.SetStateAction<Space>>
 }
 
 /**
- * useSpaceTime is the function from which our simulated universe is born.
+ * useUniverse is the function from which our simulated universe is born.
  *
  * It accepts an integer and initiates a universe with the specified
  * spatial dimensions.
@@ -26,7 +26,7 @@ export interface SpaceState {
  *
  */
 
-export const useSpaceTime = (firstDimension: number): SpaceState => {
+export const useUniverse = (firstDimension: number): Universe => {
   const [space, setSpace] = useState(() => initSpace(firstDimension))
 
   const next = () => {
