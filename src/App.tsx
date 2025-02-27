@@ -3,7 +3,7 @@ import "./App.css"
 import {
   SpaceTime,
   Particle,
-  SpatialSubstrate,
+  Space,
   Time,
   Title,
 } from "./components"
@@ -15,7 +15,7 @@ export default function Universe() {
       <SpaceTime>
         {({ space, next, violateCausality }) => (
           <>
-            <SpatialSubstrate space={space}>
+            <Space space={space}>
               {space.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
@@ -27,7 +27,7 @@ export default function Universe() {
                   />
                 ))
               )}
-            </SpatialSubstrate>
+            </Space>
             <Time
               next={next}
               space={space}
