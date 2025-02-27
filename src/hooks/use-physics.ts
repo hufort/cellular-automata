@@ -3,29 +3,31 @@ import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
 import { Space } from "../types"
 import { initSpace } from "../utils"
 
+/**
+ * Represents the physical laws and state of the simulated universe.
+ *
+ * @interface Physics
+ */
 export interface Physics {
+  /** Current state of the universe */
   space: Space
+
+  /** Advances the universe to its next state according to cellular automata rules */
   next: () => void
+
+  /** Allows direct manipulation of the universe state, bypassing normal evolution rules */
   violateCausality: React.Dispatch<React.SetStateAction<Space>>
 }
 
 /**
- * usePhysics is the function that implements the rules and laws governing our simulated universe.
+ * Implements the laws governing our simulated universe.
  *
- * It accepts an integer and initiates a universe with the specified
- * spatial dimensions.
- *
- * It returns an object with:
- *
- * space - the current state of of the universe.
- *
- * next - the function that increments a state change in the universe.
- *
- * violateCausality - a function that grants the ability to alter the
- * state of the universe despite the laws of physics.
- *
+ * @param firstDimension - The spatial dimension of the universe
+ * @returns {Physics} An object containing:
+ *  - space: The current state of the universe
+ *  - next: Function that progresses the universe to its next state
+ *  - violateCausality: Function that allows direct manipulation of the universe state
  */
-
 export const usePhysics = (firstDimension: number): Physics => {
   const [space, setSpace] = useState(() => initSpace(firstDimension))
 
