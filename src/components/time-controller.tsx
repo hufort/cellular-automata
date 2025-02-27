@@ -1,34 +1,26 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
-import { useTimeFlow } from "../hooks"
+import { useEntropy } from "../hooks"
 import { Space } from "../types"
 import { initSpace } from "../utils"
 import { type Physics } from "../hooks/use-physics"
 
 import "./time-controller.css"
 
-// export interface ControlProperties {
-//   next: VoidFunction
-//   space: Space
-//   violateCausality: React.Dispatch<React.SetStateAction<Space>>
-// }
-
 export const TimeController = ({ next, space, violateCausality }: Physics) => {
-  const [flow, setFlow] = useTimeFlow(next)
-  const slices = useRef<Space[]>([])
+  const [isIncreasing, entropy] = useEntropy(next)
+  const snapshots = useRef<Space[]>([])
 
-  const toggleFlow = () => {
-    if (!flow) {
-      slices.current.push(space)
-    }
-    setFlow((f) => !f)
+  const toggleEntropy = () => {
+    if (!isIncreasing) snapshots.current.push(space)
+    entropy((f) => !f)
   }
 
   const handleReset = () => {
-    setFlow(false)
-    if (slices.current.length > 0) {
+    entropy(false)
+    if (snapshots.current.length > 0) {
       // Move backward in snapshots
-      const previousSpace = slices.current.pop()
+      const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
       // Reset to initial state if no snapshots are left
@@ -37,34 +29,34 @@ export const TimeController = ({ next, space, violateCausality }: Physics) => {
   }
 
   const handleTick = () => {
-    setFlow(false)
-    slices.current.push(space)
+    entropy(false)
+    snapshots.current.push(space)
     next()
   }
 
   const handleClear = () => {
-    setFlow(false)
-    slices.current = []
+    entropy(false)
+    snapshots.current = []
     violateCausality(initSpace(FIRST_DIMENSION))
   }
 
   const extinct = space.every((row) => row.every((cell) => cell === DEATH))
   useEffect(() => {
-    if (extinct && slices.current.length > 0) setFlow(false)
-  }, [extinct, slices, setFlow])
+    if (extinct && snapshots.current.length > 0) entropy(false)
+  }, [extinct, snapshots, entropy])
 
   // TODO: Implement functions to move forward in snapshots if needed
 
   return (
     <div className="time-controller">
-      <button disabled={extinct} onClick={toggleFlow}>
-        {flow ? "stop" : "flow"}
+      <button disabled={extinct} onClick={toggleEntropy}>
+        {isIncreasing ? "stop" : "start"}
       </button>
       <button disabled={extinct} onClick={handleTick}>
         tick
       </button>
       <button
-        disabled={extinct && slices.current.length === 0}
+        disabled={extinct && snapshots.current.length === 0}
         onClick={handleReset}
       >
         reset

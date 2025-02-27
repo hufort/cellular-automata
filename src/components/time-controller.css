@@ -17,6 +17,7 @@
   transition: all 0.1s ease;
   text-shadow: var(--text-glow-medium);
   box-shadow: var(--elevation-low);
+  min-width: 56px;
 }
 
 .time-controller button:hover {
