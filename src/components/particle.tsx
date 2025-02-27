@@ -13,11 +13,10 @@ export interface ParticleProperties {
 /**
  * Particle: A Model of Interaction in the Simulation.
  *
- * Each Particle represents an individual unit within the SpaceTime Substrate,
- * Particle demonstrates how SpaceTime can interact with itself and change state.
+ * Each Particle represents an individual unit within the Spacetime fabric,
+ * Particle demonstrates how Spacetime can interact with itself and change state.
  * It symbolizes the spatial parameter of cosmic ecolution over time based off
  * of the fundamental rules recursively applied to the initial state of the universe.
- *
  * The 'toggleExistence' function, implements 'violateCausality', enabling a
  * Particle to switch between states.
  *
