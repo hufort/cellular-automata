@@ -1,5 +1,5 @@
 import { DEATH, LIFE, GENERATION_MS } from "../constants"
-import { Universe } from "../hooks/use-universe"
+import { Physics } from "../hooks/use-physics"
 
 import "./particle.css"
 
@@ -7,7 +7,7 @@ export interface ParticleProperties {
   y: number
   x: number
   state: number
-  violateCausality: Universe["violateCausality"]
+  violateCausality: Physics["violateCausality"]
 }
 
 /**

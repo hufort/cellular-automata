@@ -1,9 +1,9 @@
 import { FIRST_DIMENSION } from "../constants"
-import { useUniverse } from "../hooks"
-import { Universe } from "../hooks/use-universe"
+import { usePhysics } from "../hooks"
+import { Physics } from "../hooks/use-physics"
 
 export interface SpaceTimeProperties {
-  children: (props: Universe) => React.ReactNode
+  children: (props: Physics) => React.ReactNode
 }
 
 /**
@@ -30,6 +30,6 @@ export interface SpaceTimeProperties {
  */
 
 export const SpaceTime = ({ children }: SpaceTimeProperties) => {
-  const { space, next, violateCausality } = useUniverse(FIRST_DIMENSION)
+  const { space, next, violateCausality } = usePhysics(FIRST_DIMENSION)
   return <>{children({ space, next, violateCausality })}</>
 }

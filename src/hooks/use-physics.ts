@@ -3,30 +3,30 @@ import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
 import { Space } from "../types"
 import { initSpace } from "../utils"
 
-export interface Universe {
+export interface Physics {
   space: Space
   next: () => void
   violateCausality: React.Dispatch<React.SetStateAction<Space>>
 }
 
 /**
- * useUniverse is the function from which our simulated universe is born.
+ * usePhysics is the function that implements the rules and laws governing our simulated universe.
  *
  * It accepts an integer and initiates a universe with the specified
  * spatial dimensions.
  *
  * It returns an object with:
  *
- * spaceTime - the current state of of the universe.
+ * space - the current state of of the universe.
  *
  * next - the function that increments a state change in the universe.
  *
  * violateCausality - a function that grants the ability to alter the
- *                    state of the universe despite the laws of physics.
+ * state of the universe despite the laws of physics.
  *
  */
 
-export const useUniverse = (firstDimension: number): Universe => {
+export const usePhysics = (firstDimension: number): Physics => {
   const [space, setSpace] = useState(() => initSpace(firstDimension))
 
   const next = () => {
