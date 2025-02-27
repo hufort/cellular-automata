@@ -1,9 +1,9 @@
-.time-controller {
+.time {
   display: flex;
   gap: 16px;
 }
 
-.time-controller button {
+.time button {
   appearance: none;
   background: transparent;
   border: none;
@@ -20,20 +20,20 @@
   min-width: 56px;
 }
 
-.time-controller button:hover {
+.time button:hover {
   background: var(--color-interactive-hover);
   box-shadow: var(--elevation-medium);
   text-shadow: var(--text-glow-high);
 }
 
-.time-controller button:active {
+.time button:active {
   background: var(--color-interactive-active);
   box-shadow: var(--elevation-low);
   text-shadow: none;
   transform: translateY(1px);
 }
 
-.time-controller button:disabled {
+.time button:disabled {
   background: none;
   color: var(--color-fg-muted);
   cursor: not-allowed;
@@ -42,18 +42,18 @@
   text-shadow: none;
 }
 
-.time-controller button.destroy:hover {
+.time button.destroy:hover {
   box-shadow: var(--elevation-high);
   text-shadow: var(--text-glow-high);
 }
 
-.time-controller button.destroy:active {
+.time button.destroy:active {
   box-shadow: var(--elevation-medium);
   text-shadow: none;
   transform: translateY(1px);
 }
 
-.time-controller button.destroy:disabled {
+.time button.destroy:disabled {
   color: var(--color-fg-muted);
   cursor: not-allowed;
   border-color: var(--border-subtle);

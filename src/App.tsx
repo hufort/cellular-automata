@@ -4,7 +4,7 @@ import {
   SpaceTime,
   Particle,
   SpatialSubstrate,
-  TimeController,
+  Time,
   Title,
 } from "./components"
 
@@ -28,7 +28,7 @@ export default function Universe() {
                 ))
               )}
             </SpatialSubstrate>
-            <TimeController
+            <Time
               next={next}
               space={space}
               violateCausality={violateCausality}
