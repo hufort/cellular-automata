@@ -35,7 +35,7 @@ export const usePhysics = (firstDimension: number): Physics => {
     const currentSpace = space
     const nextSpace = currentSpace.map((row, y) => {
       return row.map((state, x) => {
-        const observed = _observe(y, x, currentSpace)
+        const observed = observe(y, x, currentSpace)
         if (state === DEATH && observed === 3) return LIFE
         if (state === LIFE && (observed < 2 || observed > 3)) return DEATH
         return state
@@ -48,30 +48,23 @@ export const usePhysics = (firstDimension: number): Physics => {
 }
 
 /**
- * _observe is the function that implements the causal network by which our universe operates.
+ * Observes the neighboring particles in the universe and quantifies their relationships.
  *
- * It allows the the emergent properties of the universe to observe and be observed
- * by other emergent properties. Without it, a Model of the universe can not exist.
+ * This function embodies the fundamental principle that allows information to propagate
+ * through spacetime. Similar to how electromagnetic forces in our universe enable
+ * the transmission of photons, this observation mechanism creates the foundation
+ * for causal interactions between particles.
  *
- * All that would be is a static multiverse, filled with singular I/O universes, 
- * cut off from one another, and unable to interact.
+ * Without this observation capability, particles would exist in isolation,
+ * unable to influence or be influenced by their environment.
  *
- * This causal network is akin to the fundamental forces of our own universe. 
- 
- * Take for example the electromagnetic force. When you see your child from across 
- * the dinner table, it is electromagnetic force that provides the medium by which 
- * photons bounce off of their face and into your eyes.
- *
- * Without such a causal structure, the universe would be a static soup of particles,
- * unable to interact with one another.
- * 
- * Quastion: do we interact with our own universe or are our interactions the result
- *          of the the universe interacting with itself?
- * 
+ * @param y - The row index of the particle to observe
+ * @param x - The column index of the particle to observe
+ * @param space - The current state of the universe
+ * @returns The number of living neighbors related to the observed particle
  */
-
 // prettier-ignore
-const _observe = (y: number, x: number, space: Space) =>
+const observe = (y: number, x: number, space: Space) =>
   [
     [-1, -1], [-1, 0], [-1, 1],
     [ 0, -1], /*y,x*/  [ 0, 1],
