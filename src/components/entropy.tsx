@@ -59,7 +59,9 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
       >
         reset
       </button>
-      <button onClick={handleClear}>clear</button>
+      <button disabled={extinct} onClick={handleClear}>
+        clear
+      </button>
     </div>
   )
 }

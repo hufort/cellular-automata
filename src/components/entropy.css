@@ -40,6 +40,8 @@
   border-color: var(--border-subtle);
   box-shadow: none;
   text-shadow: none;
+  transform: none;
+  color: var(--color-fg-subtle);
 }
 
 .entropy button.destroy:hover {
