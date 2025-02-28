@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useEntropy } from "../hooks"
-import { Space } from "../types"
+import { Quanta } from "../types"
 import { initQuanta } from "../utils"
 import { type Physics } from "../hooks/use-physics"
 
@@ -25,13 +25,13 @@ import "./time.css"
  *   - space: Current state of the universe
  *   - violateCausality: Function to directly alter the universe state
  */
-export const Time = ({ next, space, violateCausality }: Physics) => {
+export const Time = ({ next, quanta, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 
-  const snapshots = useRef<Space[]>([])
+  const snapshots = useRef<Quanta[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(space)
+    if (!isIncreasing) snapshots.current.push(quanta)
     entropy((f) => !f)
   }
 
@@ -47,7 +47,7 @@ export const Time = ({ next, space, violateCausality }: Physics) => {
 
   const handleTick = () => {
     entropy(false)
-    snapshots.current.push(space)
+    snapshots.current.push(quanta)
     next()
   }
 
@@ -57,7 +57,9 @@ export const Time = ({ next, space, violateCausality }: Physics) => {
     violateCausality(initQuanta(FIRST_DIMENSION))
   }
 
-  const extinct = space.every((row) => row.every((cell) => cell === DEATH))
+  const extinct = quanta.every((row) =>
+    row.every((quantum) => quantum === DEATH)
+  )
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)
