@@ -1,12 +1,6 @@
 import "./App.css"
 
-import {
-  Spacetime,
-  Particle,
-  Space,
-  Time,
-  Title,
-} from "./components"
+import { Spacetime, Particle, Space, Time, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -15,7 +9,7 @@ export default function Universe() {
       <Spacetime>
         {({ space, next, violateCausality }) => (
           <>
-            <Space space={space}>
+            <Space dimension={space.length}>
               {space.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
