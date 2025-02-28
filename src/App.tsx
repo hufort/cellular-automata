@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { Physics, Particle, Lattice, Time, Title } from "./components"
+import { Physics, Quantum, Lattice, Time, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -12,7 +12,7 @@ export default function Universe() {
             <Lattice dimension={space.length}>
               {space.map((row, y) =>
                 row.map((state, x) => (
-                  <Particle
+                  <Quantum
                     key={`${y}-${x}`}
                     y={y}
                     x={x}
