@@ -1,5 +1,5 @@
 export { Particle } from "./particle"
-export { Spacetime } from "./spacetime"
 export { Space } from "./space"
+export { Spacetime } from "./spacetime"
 export { Time } from "./time"
 export { Title } from "./title"
