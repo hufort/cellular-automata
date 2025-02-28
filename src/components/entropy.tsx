@@ -7,29 +7,6 @@ import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-/**
- * Entropy: Controls the flow of disorder and temporal progression in our universe simulation.
- *
- * This component embodies the Second Law of Thermodynamics - the principle that
- * isolated systems spontaneously evolve toward thermodynamic equilibrium,
- * the state of maximum entropy. What we perceive as "time" is fundamentally
- * linked to this increase in entropy, giving rise to the "arrow of time."
- *
- * Entropy provides controls for:
- * - Starting/stopping the automatic progression of the simulation
- * - Stepping forward manually with "tick"
- * - Reversing entropy by returning to previous states
- * - Clearing the system to a zero-entropy initial state
- *
- * The simulation automatically pauses when the system reaches maximum entropy
- * (all quanta are in the death state), reflecting how time becomes
- * meaningless in a state of thermodynamic equilibrium.
- *
- * @param props - Physics interface containing:
- *   - next: Function that advances the universe to its next state
- *   - quanta: Current state of quanta in the universe
- *   - violateCausality: Function to directly alter the universe state
- */
 export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 

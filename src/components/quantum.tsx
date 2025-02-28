@@ -5,41 +5,11 @@ import { Quantum as QuantumType } from "../types"
 import "./quantum.css"
 
 export interface QuantumProperties {
-  /** Vertical position in the lattice */
   y: number
-
-  /** Horizontal position in the lattice */
   x: number
-
-  /** Current state of this quantum (LIFE or DEATH) */
   state: QuantumType
-
-  /** Function that allows direct manipulation of the universe state */
   violateCausality: Physics["violateCausality"]
 }
-
-/**
- * Quantum: A fundamental unit of discrete energy/matter in our universe simulation.
- *
- * Each Quantum represents an individual point within the Lattice,
- * capable of existing in a binary state (similar to quantum spin states).
- * It embodies the quantum mechanical concept of discrete, quantized states and
- * demonstrates how the Lattice can interact with itself through quantum fluctuations.
- *
- * The 'toggleExistence' function implements 'violateCausality', enabling a
- * Quantum to switch between states, mirroring quantum phenomena like state flipping.
- *
- * While Quantum operates within the deterministic rules of the simulation,
- * 'violateCausality' is triggered by an external actor through an onClick event.
- * This tongue-in-cheek naming hints at a philosophical reflection on the concepts
- * of determinism and quantum uncertainty. It raises questions about the role of
- * observation and measurement in quantum systems - does the observer collapse
- * the wave function? Or does the system evolve deterministically?
- *
- * Quantum is a key component in our simulation, not just in modeling
- * the dynamics of the universe, but also in offering a window into deeper
- * philosophical explorations about quantum mechanics, determinism, and the nature of reality.
- */
 
 export const Quantum = ({
   y,
