@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
-import { Space } from "../types"
-import { initSpace } from "../utils"
+import { Quanta } from "../types"
+import { initQuanta } from "../utils"
 
 /**
  * Represents the physical laws and state of the simulated universe.
@@ -9,14 +9,14 @@ import { initSpace } from "../utils"
  * @interface Physics
  */
 export interface Physics {
-  /** Current state of the universe's quantum particles */
-  quanta: Space
+  /** Current state of the universe's quanta */
+  quanta: Quanta
 
   /** Advances the universe to its next state according to cellular automata rules */
   next: () => void
 
   /** Allows direct manipulation of the universe state, bypassing normal evolution rules */
-  violateCausality: React.Dispatch<React.SetStateAction<Space>>
+  violateCausality: React.Dispatch<React.SetStateAction<Quanta>>
 }
 
 /**
@@ -24,12 +24,12 @@ export interface Physics {
  *
  * @param firstDimension - The spatial dimension of the universe
  * @returns {Physics} An object containing:
- *  - quanta: The current state of all quantum particles in the universe
+ *  - quanta: The current state of all quanta in the universe
  *  - next: Function that progresses the universe to its next state
  *  - violateCausality: Function that allows direct manipulation of the universe state
  */
 export const usePhysics = (firstDimension: number): Physics => {
-  const [quanta, setQuanta] = useState(() => initSpace(firstDimension))
+  const [quanta, setQuanta] = useState(() => initQuanta(firstDimension))
 
   const next = () => {
     const currentQuanta = quanta
@@ -48,22 +48,22 @@ export const usePhysics = (firstDimension: number): Physics => {
 }
 
 /**
- * Observes the neighboring particles in the universe and quantifies their relationships.
+ * Observes the neighboring quanta in the universe and quantifies their relationships.
  *
  * This function embodies the fundamental principle that allows information to propagate
  * through spacetime. Similar to how electromagnetic forces in our universe enable
  * the transmission of photons, this observation mechanism creates the foundation
- * for causal interactions between particles.
+ * for causal interactions between quanta.
  *
- * Without this observation capability, particles would exist in isolation,
+ * Without this observation capability, quanta would exist in isolation,
  * unable to influence or be influenced by their environment.
  *
- * @param y - The row index of the particle to observe
- * @param x - The column index of the particle to observe
+ * @param y - The row index of the quantum to observe
+ * @param x - The column index of the quantum to observe
  * @param quanta - The current state of the universe
- * @returns The number of living neighbors related to the observed particle
+ * @returns The number of living neighbors related to the observed quantum
  */
-const observe = (y: number, x: number, quanta: Space) =>
+const observe = (y: number, x: number, quanta: Quanta) =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],

@@ -24,7 +24,7 @@ export default function Universe() {
             </Lattice>
             <Entropy
               next={next}
-              space={quanta}
+              quanta={quanta}
               violateCausality={violateCausality}
             />
           </>

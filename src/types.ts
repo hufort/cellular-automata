@@ -1,1 +1,1 @@
-export type Space = number[][]
+export type Quanta = number[][]

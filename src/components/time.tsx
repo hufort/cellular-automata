@@ -1,42 +1,37 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useEntropy } from "../hooks"
-import { Quanta } from "../types"
+import { Space } from "../types"
 import { initQuanta } from "../utils"
 import { type Physics } from "../hooks/use-physics"
 
-import "./entropy.css"
+import "./time.css"
 
 /**
- * Entropy: Controls the flow of disorder and temporal progression in our universe simulation.
+ * Represents the temporal aspect of our universe simulation.
  *
- * This component embodies the Second Law of Thermodynamics - the principle that
- * isolated systems spontaneously evolve toward thermodynamic equilibrium,
- * the state of maximum entropy. What we perceive as "time" is fundamentally
- * linked to this increase in entropy, giving rise to the "arrow of time."
+ * It provides control over the flow of entropy (time) within the simulation,
+ * allowing users to start/stop the automatic progression, step forward manually,
+ * or reset to previous states.
  *
- * Entropy provides controls for:
- * - Starting/stopping the automatic progression of the simulation
- * - Stepping forward manually with "tick"
- * - Reversing entropy by returning to previous states
- * - Clearing the system to a zero-entropy initial state
- *
- * The simulation automatically pauses when the system reaches maximum entropy
- * (all quanta are in the death state), reflecting how time becomes
- * meaningless in a state of thermodynamic equilibrium.
+ * This component embodies the principle that what we perceive as time is
+ * fundamentally linked to entropy - the measure of disorder in a system.
+ * The Second Law of Thermodynamics describes the statistical tendency of
+ * systems to evolve toward states of higher entropy, giving rise to our
+ * perception of "the arrow of time".
  *
  * @param props - Physics interface containing:
  *   - next: Function that advances the universe to its next state
- *   - quanta: Current state of quanta in the universe
+ *   - space: Current state of the universe
  *   - violateCausality: Function to directly alter the universe state
  */
-export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
+export const Time = ({ next, space, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 
-  const snapshots = useRef<Quanta[]>([])
+  const snapshots = useRef<Space[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(quanta)
+    if (!isIncreasing) snapshots.current.push(space)
     entropy((f) => !f)
   }
 
@@ -52,7 +47,7 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
 
   const handleTick = () => {
     entropy(false)
-    snapshots.current.push(quanta)
+    snapshots.current.push(space)
     next()
   }
 
@@ -62,14 +57,14 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
     violateCausality(initQuanta(FIRST_DIMENSION))
   }
 
-  const extinct = quanta.every((row) => row.every((cell) => cell === DEATH))
+  const extinct = space.every((row) => row.every((cell) => cell === DEATH))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)
   }, [extinct, snapshots, entropy])
 
   return (
-    <div className="entropy">
+    <div className="time">
       <button disabled={extinct} onClick={toggleEntropy}>
         {isIncreasing ? "stop" : "start"}
       </button>
