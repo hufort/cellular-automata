@@ -1,5 +1,5 @@
+export { Entropy } from "./entropy"
 export { Lattice } from "./lattice"
 export { Physics } from "./physics"
 export { Quantum } from "./quantum"
-export { Time } from "./time"
 export { Title } from "./title"

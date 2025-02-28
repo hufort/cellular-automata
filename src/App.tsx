@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { Physics, Quantum, Lattice, Time, Title } from "./components"
+import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -22,7 +22,7 @@ export default function Universe() {
                 ))
               )}
             </Lattice>
-            <Time
+            <Entropy
               next={next}
               space={space}
               violateCausality={violateCausality}
