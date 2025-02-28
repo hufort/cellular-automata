@@ -4,7 +4,7 @@ import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
-    <div className="universe grain">
+    <div className="universe cmbr">
       <Title />
       <Physics>
         {({ quanta, next, violateCausality }) => (
