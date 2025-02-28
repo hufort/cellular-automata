@@ -1,4 +1,4 @@
-import "./App.css"
+import "./universe.css"
 
 import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
 
