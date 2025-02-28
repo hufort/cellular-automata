@@ -1,12 +1,12 @@
 import "./App.css"
 
-import { Spacetime, Particle, Space, Time, Title } from "./components"
+import { Physics, Particle, Space, Time, Title } from "./components"
 
 export default function Universe() {
   return (
     <div className="universe grain">
       <Title />
-      <Spacetime>
+      <Physics>
         {({ space, next, violateCausality }) => (
           <>
             <Space dimension={space.length}>
@@ -29,7 +29,7 @@ export default function Universe() {
             />
           </>
         )}
-      </Spacetime>
+      </Physics>
     </div>
   )
 }
