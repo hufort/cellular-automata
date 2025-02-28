@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { Physics, Particle, Space, Time, Title } from "./components"
+import { Physics, Particle, Lattice, Time, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -9,7 +9,7 @@ export default function Universe() {
       <Physics>
         {({ space, next, violateCausality }) => (
           <>
-            <Space dimension={space.length}>
+            <Lattice dimension={space.length}>
               {space.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
@@ -21,7 +21,7 @@ export default function Universe() {
                   />
                 ))
               )}
-            </Space>
+            </Lattice>
             <Time
               next={next}
               space={space}
