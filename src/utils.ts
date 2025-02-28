@@ -1,11 +1,7 @@
 import { DEATH } from "./constants"
-import { SpaceTimeStructure } from "./types"
+import { Quanta } from "./types"
 
-export const initSpaceTime = (firstDimension: number): SpaceTimeStructure => {
-  const originOfSpace = Array.from({ length: firstDimension }, () =>
+export const initQuanta = (firstDimension: number): Quanta =>
+  Array.from({ length: firstDimension }, () =>
     new Array(firstDimension).fill(DEATH)
   )
-
-  // space wrapped up in time
-  return [originOfSpace]
-}

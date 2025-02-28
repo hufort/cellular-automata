@@ -1,27 +1,35 @@
-import './App.css';
+import "./App.css"
 
-import { SpaceTime, Particle, SpatialSubstrate, TimeController, Title } from './components';
-
-import { T } from './constants';
+import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
-    <div className="universe grain">
+    <div className="universe cmbr">
       <Title />
-      <SpaceTime>
-        {({ spaceTime, next, violateCausality }) => (
+      <Physics>
+        {({ quanta, next, violateCausality }) => (
           <>
-            <SpatialSubstrate space={spaceTime[T]}>
-              {spaceTime[T].map((row, y) =>
+            <Lattice dimension={quanta.length}>
+              {quanta.map((row, y) =>
                 row.map((state, x) => (
-                  <Particle key={`${y}-${x}`} y={y} x={x} state={state} violateCausality={violateCausality} />
+                  <Quantum
+                    key={`${y}-${x}`}
+                    y={y}
+                    x={x}
+                    state={state}
+                    violateCausality={violateCausality}
+                  />
                 ))
               )}
-            </SpatialSubstrate>
-            <TimeController next={next} space={spaceTime[T]} violateCausality={violateCausality} />
+            </Lattice>
+            <Entropy
+              next={next}
+              quanta={quanta}
+              violateCausality={violateCausality}
+            />
           </>
         )}
-      </SpaceTime>
+      </Physics>
     </div>
-  );
+  )
 }

@@ -1,2 +1,2 @@
-export { useSpaceTime } from "./use-space-time"
-export { useTimeFlow } from "./use-time-flow"
+export { usePhysics } from "./use-physics"
+export { useEntropy } from "./use-entropy"
