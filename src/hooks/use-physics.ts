@@ -63,8 +63,8 @@ export const usePhysics = (firstDimension: number): Physics => {
  * @param space - The current state of the universe
  * @returns The number of living neighbors related to the observed particle
  */
-// prettier-ignore
 const observe = (y: number, x: number, space: Space) =>
+  // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
     [ 0, -1], /*y,x*/  [ 0, 1],
