@@ -32,13 +32,12 @@ export const usePhysics = (firstDimension: number): Physics => {
   const [quanta, setQuanta] = useState(() => initQuanta(firstDimension))
 
   const next = () => {
-    const currentQuanta = quanta
-    const nextQuanta = currentQuanta.map((row, y) => {
-      return row.map((state, x) => {
-        const observed = observe(y, x, currentQuanta)
-        if (state === DEATH && observed === 3) return LIFE
-        if (state === LIFE && (observed < 2 || observed > 3)) return DEATH
-        return state
+    const nextQuanta = quanta.map((row, y) => {
+      return row.map((quantum, x) => {
+        const observed = observe(y, x, quanta)
+        if (quantum === DEATH && observed === 3) return LIFE
+        if (quantum === LIFE && (observed < 2 || observed > 3)) return DEATH
+        return quantum
       })
     })
     setQuanta(nextQuanta)
