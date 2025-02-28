@@ -27,16 +27,16 @@ import "./entropy.css"
  *
  * @param props - Physics interface containing:
  *   - next: Function that advances the universe to its next state
- *   - space: Current state of the universe
+ *   - quanta: Current state of quantum particles in the universe
  *   - violateCausality: Function to directly alter the universe state
  */
-export const Entropy = ({ next, space, violateCausality }: Physics) => {
+export const Entropy = ({ next, space: quanta, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 
   const snapshots = useRef<Space[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(space)
+    if (!isIncreasing) snapshots.current.push(quanta)
     entropy((f) => !f)
   }
 
@@ -52,7 +52,7 @@ export const Entropy = ({ next, space, violateCausality }: Physics) => {
 
   const handleTick = () => {
     entropy(false)
-    snapshots.current.push(space)
+    snapshots.current.push(quanta)
     next()
   }
 
@@ -62,7 +62,7 @@ export const Entropy = ({ next, space, violateCausality }: Physics) => {
     violateCausality(initSpace(FIRST_DIMENSION))
   }
 
-  const extinct = space.every((row) => row.every((cell) => cell === DEATH))
+  const extinct = quanta.every((row) => row.every((cell) => cell === DEATH))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)

@@ -9,8 +9,8 @@ import { initSpace } from "../utils"
  * @interface Physics
  */
 export interface Physics {
-  /** Current state of the universe */
-  space: Space
+  /** Current state of the universe's quantum particles */
+  quanta: Space
 
   /** Advances the universe to its next state according to cellular automata rules */
   next: () => void
@@ -24,27 +24,27 @@ export interface Physics {
  *
  * @param firstDimension - The spatial dimension of the universe
  * @returns {Physics} An object containing:
- *  - space: The current state of the universe
+ *  - quanta: The current state of all quantum particles in the universe
  *  - next: Function that progresses the universe to its next state
  *  - violateCausality: Function that allows direct manipulation of the universe state
  */
 export const usePhysics = (firstDimension: number): Physics => {
-  const [space, setSpace] = useState(() => initSpace(firstDimension))
+  const [quanta, setQuanta] = useState(() => initSpace(firstDimension))
 
   const next = () => {
-    const currentSpace = space
-    const nextSpace = currentSpace.map((row, y) => {
+    const currentQuanta = quanta
+    const nextQuanta = currentQuanta.map((row, y) => {
       return row.map((state, x) => {
-        const observed = observe(y, x, currentSpace)
+        const observed = observe(y, x, currentQuanta)
         if (state === DEATH && observed === 3) return LIFE
         if (state === LIFE && (observed < 2 || observed > 3)) return DEATH
         return state
       })
     })
-    setSpace(nextSpace)
+    setQuanta(nextQuanta)
   }
 
-  return { space, next, violateCausality: setSpace }
+  return { quanta, next, violateCausality: setQuanta }
 }
 
 /**
@@ -60,10 +60,10 @@ export const usePhysics = (firstDimension: number): Physics => {
  *
  * @param y - The row index of the particle to observe
  * @param x - The column index of the particle to observe
- * @param space - The current state of the universe
+ * @param quanta - The current state of the universe
  * @returns The number of living neighbors related to the observed particle
  */
-const observe = (y: number, x: number, space: Space) =>
+const observe = (y: number, x: number, quanta: Space) =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
@@ -75,6 +75,6 @@ const observe = (y: number, x: number, space: Space) =>
     const inD1 = otherY >= 0 && otherY < FIRST_DIMENSION
     const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
     const inSpace = inD1 && inD2
-    const otherState = inSpace ? space[otherY][otherX] : null
+    const otherState = inSpace ? quanta[otherY][otherX] : null
     return acc + (otherState === LIFE ? 1 : 0)
   }, 0)

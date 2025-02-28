@@ -19,7 +19,7 @@ export interface PhysicsProps {
  * 
  * The component provides three fundamental elements of our physics:
  * 
- * 1. `space` - The current state of all particles in the universe
+ * 1. `quanta` - The current state of all quantum particles in the universe
  * 2. `next` - The function that advances the universe by applying physical laws (causality)
  * 3. `violateCausality` - A special function that allows direct manipulation of the universe
  *
@@ -27,6 +27,6 @@ export interface PhysicsProps {
  * intrinsically from physics itself rather than being imposed externally.
  */
 export const Physics = ({ children }: PhysicsProps) => {
-  const { space, next, violateCausality } = usePhysics(FIRST_DIMENSION)
-  return <>{children({ space, next, violateCausality })}</>
+  const { quanta, next, violateCausality } = usePhysics(FIRST_DIMENSION)
+  return <>{children({ quanta, next, violateCausality })}</>
 }

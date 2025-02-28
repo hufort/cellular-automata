@@ -7,10 +7,10 @@ export default function Universe() {
     <div className="universe grain">
       <Title />
       <Physics>
-        {({ space, next, violateCausality }) => (
+        {({ quanta, next, violateCausality }) => (
           <>
-            <Lattice dimension={space.length}>
-              {space.map((row, y) =>
+            <Lattice dimension={quanta.length}>
+              {quanta.map((row, y) =>
                 row.map((state, x) => (
                   <Quantum
                     key={`${y}-${x}`}
@@ -24,7 +24,7 @@ export default function Universe() {
             </Lattice>
             <Entropy
               next={next}
-              space={space}
+              space={quanta}
               violateCausality={violateCausality}
             />
           </>
