@@ -62,7 +62,7 @@ export const usePhysics = (firstDimension: number): Physics => {
  * @param quanta - The current state of the universe
  * @returns The number of living neighbors related to the observed quantum
  */
-const observe = (y: number, x: number, quanta: Quanta) =>
+const observe = (y: number, x: number, quanta: Quanta): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],

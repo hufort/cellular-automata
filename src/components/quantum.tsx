@@ -1,12 +1,20 @@
 import { DEATH, LIFE, GENERATION_MS } from "../constants"
 import { Physics } from "../hooks/use-physics"
+import { Quantum as QuantumType } from "../types"
 
 import "./quantum.css"
 
 export interface QuantumProperties {
+  /** Vertical position in the lattice */
   y: number
+
+  /** Horizontal position in the lattice */
   x: number
-  state: number
+
+  /** Current state of this quantum (LIFE or DEATH) */
+  state: QuantumType
+
+  /** Function that allows direct manipulation of the universe state */
   violateCausality: Physics["violateCausality"]
 }
 
@@ -42,13 +50,13 @@ export const Quantum = ({
   const toggleExistence = () =>
     violateCausality((physics) => {
       const nextSpace = [...physics]
-      nextSpace[y][x] = state ? DEATH : LIFE
+      nextSpace[y][x] = state === LIFE ? DEATH : LIFE
       return nextSpace
     })
 
   return (
     <button
-      className={`quantum ${state ? "life" : "death"}`}
+      className={`quantum ${state === LIFE ? "life" : "death"}`}
       onClick={toggleExistence}
       style={{
         transition: `border-radius ease-in-out ${GENERATION_MS}ms, border-radius ease-in-out ${GENERATION_MS}ms`,
