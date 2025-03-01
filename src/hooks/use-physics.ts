@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
+import { ON, OFF, FIRST_DIMENSION } from "../constants"
 import { Particles } from "../types"
 import { initParticles } from "../utils"
 
@@ -10,14 +10,16 @@ export interface Physics {
 }
 
 export const usePhysics = (firstDimension: number): Physics => {
-  const [particles, setParticles] = useState(() => initParticles(firstDimension))
+  const [particles, setParticles] = useState(() =>
+    initParticles(firstDimension)
+  )
 
   const next = () => {
     const nextParticles = particles.map((row, y) => {
       return row.map((particle, x) => {
         const observed = observe(y, x, particles)
-        if (particle === DEATH && observed === 3) return LIFE
-        if (particle === LIFE && (observed < 2 || observed > 3)) return DEATH
+        if (particle === OFF && observed === 3) return ON
+        if (particle === ON && (observed < 2 || observed > 3)) return OFF
         return particle
       })
     })
@@ -40,5 +42,5 @@ const observe = (y: number, x: number, particles: Particles): number =>
     const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
     const inSpace = inD1 && inD2
     const otherState = inSpace ? particles[otherY][otherX] : null
-    return acc + (otherState === LIFE ? 1 : 0)
+    return acc + (otherState === ON ? 1 : 0)
   }, 0)

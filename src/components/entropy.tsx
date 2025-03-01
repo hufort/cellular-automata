@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react"
-import { FIRST_DIMENSION, DEATH } from "../constants"
+import { FIRST_DIMENSION, OFF } from "../constants"
 import { useEntropy } from "../hooks"
 import { Particles } from "../types"
 import { initParticles } from "../utils"
@@ -39,7 +39,7 @@ export const Entropy = ({ next, particles, violateCausality }: Physics) => {
     violateCausality(initParticles(FIRST_DIMENSION))
   }
 
-  const extinct = particles.every((row) => row.every((cell) => cell === DEATH))
+  const extinct = particles.every((row) => row.every((cell) => cell === OFF))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)
