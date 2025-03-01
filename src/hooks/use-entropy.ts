@@ -5,13 +5,13 @@ import { Physics } from "./use-physics"
 export const useEntropy = (
   transition: Physics["transition"]
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
-  const [isIncreasing, entropy] = useState(false)
+  const [entropy, setEntropy] = useState(false)
 
   useEffect(() => {
     let id: NodeJS.Timeout
-    if (isIncreasing) id = setInterval(transition, ENTROPIC_STEP)
+    if (entropy) id = setInterval(transition, ENTROPIC_STEP)
     return () => clearInterval(id)
-  }, [isIncreasing, transition])
+  }, [entropy, transition])
 
-  return [isIncreasing, entropy]
+  return [entropy, setEntropy]
 }
