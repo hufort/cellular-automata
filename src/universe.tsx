@@ -9,7 +9,7 @@ export default function Universe() {
       <Physics>
         {({ particles, next, violateCausality }) => (
           <>
-            <Field dimension={particles.length}>
+            <Field>
               {particles.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
