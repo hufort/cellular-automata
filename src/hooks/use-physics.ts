@@ -9,8 +9,8 @@ export interface Physics {
   violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
-export const usePhysics = (firstDimension: number): Physics => {
-  const [order, setOrder] = useState(() => initOrder(firstDimension))
+export const usePhysics = (dimension: number): Physics => {
+  const [order, setOrder] = useState(() => initOrder(dimension))
 
   const decay = () => {
     const nextOrder = order.map((row, y) => {
