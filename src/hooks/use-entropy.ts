@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { GENERATION_MS } from "../constants"
+import { Physics } from "./use-physics"
 
 export const useEntropy = (
-  next: VoidFunction
+  next: Physics["next"]
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [isIncreasing, entropy] = useState(false)
 
