@@ -1,30 +1,30 @@
-import "./App.css"
+import "./universe.css"
 
-import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
+import { Physics, Particle, Field, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
     <div className="universe cmbr">
       <Title />
       <Physics>
-        {({ quanta, next, violateCausality }) => (
+        {({ order, decay, violateCausality }) => (
           <>
-            <Lattice dimension={quanta.length}>
-              {quanta.map((row, y) =>
-                row.map((state, x) => (
-                  <Quantum
+            <Field>
+              {order.map((row, y) =>
+                row.map((charge, x) => (
+                  <Particle
                     key={`${y}-${x}`}
                     y={y}
                     x={x}
-                    state={state}
+                    charge={charge}
                     violateCausality={violateCausality}
                   />
                 ))
               )}
-            </Lattice>
+            </Field>
             <Entropy
-              next={next}
-              quanta={quanta}
+              decay={decay}
+              order={order}
               violateCausality={violateCausality}
             />
           </>

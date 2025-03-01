@@ -1,79 +1,44 @@
 import { useState } from "react"
-import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
-import { Quanta } from "../types"
-import { initQuanta } from "../utils"
+import { ON, OFF, DIMENSION } from "../constants"
+import { Order } from "../types"
+import { initOrder } from "../utils"
 
-/**
- * Represents the physical laws and state of the simulated universe.
- *
- * @interface Physics
- */
 export interface Physics {
-  /** Current state of the universe's quanta */
-  quanta: Quanta
-
-  /** Advances the universe to its next state according to cellular automata rules */
-  next: () => void
-
-  /** Allows direct manipulation of the universe state, bypassing normal evolution rules */
-  violateCausality: React.Dispatch<React.SetStateAction<Quanta>>
+  order: Order
+  decay: () => void
+  violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
-/**
- * Implements the laws governing our simulated universe.
- *
- * @param firstDimension - The spatial dimension of the universe
- * @returns {Physics} An object containing:
- *  - quanta: The current state of all quanta in the universe
- *  - next: Function that progresses the universe to its next state
- *  - violateCausality: Function that allows direct manipulation of the universe state
- */
 export const usePhysics = (firstDimension: number): Physics => {
-  const [quanta, setQuanta] = useState(() => initQuanta(firstDimension))
+  const [order, setOrder] = useState(() => initOrder(firstDimension))
 
-  const next = () => {
-    const nextQuanta = quanta.map((row, y) => {
-      return row.map((quantum, x) => {
-        const observed = observe(y, x, quanta)
-        if (quantum === DEATH && observed === 3) return LIFE
-        if (quantum === LIFE && (observed < 2 || observed > 3)) return DEATH
-        return quantum
+  const decay = () => {
+    const nextOrder = order.map((row, y) => {
+      return row.map((charge, x) => {
+        const observed = observe(y, x, order)
+        if (charge === OFF && observed === 3) return ON
+        if (charge === ON && (observed < 2 || observed > 3)) return OFF
+        return charge
       })
     })
-    setQuanta(nextQuanta)
+    setOrder(nextOrder)
   }
 
-  return { quanta, next, violateCausality: setQuanta }
+  return { order, decay, violateCausality: setOrder }
 }
 
-/**
- * Observes the neighboring quanta in the universe and quantifies their relationships.
- *
- * This function embodies the fundamental principle that allows information to propagate
- * through spacetime. Similar to how electromagnetic forces in our universe enable
- * the transmission of photons, this observation mechanism creates the foundation
- * for causal interactions between quanta.
- *
- * Without this observation capability, quanta would exist in isolation,
- * unable to influence or be influenced by their environment.
- *
- * @param y - The row index of the quantum to observe
- * @param x - The column index of the quantum to observe
- * @param quanta - The current state of the universe
- * @returns The number of living neighbors related to the observed quantum
- */
-const observe = (y: number, x: number, quanta: Quanta) =>
+const observe = (y: number, x: number, order: Order): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
     [ 0, -1], /*y,x*/  [ 0, 1],
     [ 1, -1], [ 1, 0], [ 1, 1],
   ].reduce((acc, [ox, oy]) => {
-    const otherY = y + oy
-    const otherX = x + ox
-    const inD1 = otherY >= 0 && otherY < FIRST_DIMENSION
-    const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
+    const oY = y + oy
+    const oX = x + ox
+    const inD1 = oY >= 0 && oY < DIMENSION
+    const inD2 = oX >= 0 && oX < DIMENSION
     const inSpace = inD1 && inD2
-    const otherState = inSpace ? quanta[otherY][otherX] : null
-    return acc + (otherState === LIFE ? 1 : 0)
+    const oCharge = inSpace ? order[oY][oX] : null
+    return acc + (oCharge || 0)
   }, 0)
