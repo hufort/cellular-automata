@@ -3,15 +3,15 @@ import { ENTROPIC_STEP } from "../constants"
 import { Physics } from "./use-physics"
 
 export const useEntropy = (
-  decay: Physics["decay"]
+  transition: Physics["transition"]
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [isIncreasing, entropy] = useState(false)
 
   useEffect(() => {
     let id: NodeJS.Timeout
-    if (isIncreasing) id = setInterval(decay, ENTROPIC_STEP)
+    if (isIncreasing) id = setInterval(transition, ENTROPIC_STEP)
     return () => clearInterval(id)
-  }, [isIncreasing, decay])
+  }, [isIncreasing, transition])
 
   return [isIncreasing, entropy]
 }

@@ -7,7 +7,7 @@ export default function Universe() {
     <div className="universe cmbr">
       <Title />
       <Physics>
-        {({ order, decay, violateCausality }) => (
+        {({ order, transition, violateCausality }) => (
           <>
             <Field>
               {order.map((row, y) =>
@@ -23,7 +23,7 @@ export default function Universe() {
               )}
             </Field>
             <Entropy
-              decay={decay}
+              transition={transition}
               order={order}
               violateCausality={violateCausality}
             />

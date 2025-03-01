@@ -5,14 +5,14 @@ import { initOrder } from "../utils"
 
 export interface Physics {
   order: Order
-  decay: () => void
+  transition: () => void
   violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
 export const usePhysics = (dimension: number): Physics => {
   const [order, setOrder] = useState(() => initOrder(dimension))
 
-  const decay = () => {
+  const transition = () => {
     const nextOrder = order.map((row, y) => {
       return row.map((charge, x) => {
         const observed = observe(y, x, order)
@@ -24,7 +24,7 @@ export const usePhysics = (dimension: number): Physics => {
     setOrder(nextOrder)
   }
 
-  return { order, decay, violateCausality: setOrder }
+  return { order, transition, violateCausality: setOrder }
 }
 
 const observe = (y: number, x: number, order: Order): number =>
