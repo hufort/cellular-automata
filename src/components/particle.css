@@ -1,4 +1,4 @@
-.quantum {
+.particle {
   appearance: none;
   border: none;
   background: var(--color-bg-base);
@@ -12,17 +12,17 @@
   transition: all 0.2s ease;
 }
 
-.quantum:hover {
+.particle:hover {
   background: var(--color-bg-elevated);
   box-shadow: var(--elevation-medium);
   transform: translateZ(0);
 }
 
-.quantum.life {
+.particle.life {
   background: var(--color-accent-base);
   box-shadow: var(--elevation-high);
 }
 
-.quantum.life:hover {
+.particle.life:hover {
   box-shadow: var(--glow-high), 0 0 0 1px var(--border-medium);
 }

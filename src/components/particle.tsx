@@ -1,22 +1,22 @@
 import { DEATH, LIFE, GENERATION_MS } from "../constants"
 import { Physics } from "../hooks/use-physics"
-import { Quantum as QuantumType } from "../types"
+import { Particle as ParticleType } from "../types"
 
-import "./quantum.css"
+import "./particle.css"
 
-export interface QuantumProperties {
+export interface ParticleProperties {
   y: number
   x: number
-  state: QuantumType
+  state: ParticleType
   violateCausality: Physics["violateCausality"]
 }
 
-export const Quantum = ({
+export const Particle = ({
   y,
   x,
   state,
   violateCausality,
-}: QuantumProperties) => {
+}: ParticleProperties) => {
   const toggleExistence = () =>
     violateCausality((physics) => {
       const nextSpace = [...physics]
@@ -26,7 +26,7 @@ export const Quantum = ({
 
   return (
     <button
-      className={`quantum ${state === LIFE ? "life" : "death"}`}
+      className={`particle ${state === LIFE ? "life" : "death"}`}
       onClick={toggleExistence}
       style={{
         transition: `border-radius ease-in-out ${GENERATION_MS}ms, border-radius ease-in-out ${GENERATION_MS}ms`,

@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, DEATH } from "../constants"
 import { useEntropy } from "../hooks"
-import { Quanta } from "../types"
-import { initQuanta } from "../utils"
+import { Particles } from "../types"
+import { initParticles } from "../utils"
 import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
@@ -10,7 +10,7 @@ import "./entropy.css"
 export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 
-  const snapshots = useRef<Quanta[]>([])
+  const snapshots = useRef<Particles[]>([])
 
   const toggleEntropy = () => {
     if (!isIncreasing) snapshots.current.push(quanta)
@@ -23,7 +23,7 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
-      violateCausality(initQuanta(FIRST_DIMENSION))
+      violateCausality(initParticles(FIRST_DIMENSION))
     }
   }
 
@@ -36,7 +36,7 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
   const handleClear = () => {
     entropy(false)
     snapshots.current = []
-    violateCausality(initQuanta(FIRST_DIMENSION))
+    violateCausality(initParticles(FIRST_DIMENSION))
   }
 
   const extinct = quanta.every((row) => row.every((cell) => cell === DEATH))

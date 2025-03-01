@@ -1,4 +1,4 @@
 import { DEATH, LIFE } from "./constants"
 
-export type Quantum = typeof DEATH | typeof LIFE
-export type Quanta = Quantum[][]
+export type Particle = typeof DEATH | typeof LIFE
+export type Particles = Particle[][]

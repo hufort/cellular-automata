@@ -1,6 +1,6 @@
 import "./universe.css"
 
-import { Physics, Quantum, Lattice, Entropy, Title } from "./components"
+import { Physics, Particle, Lattice, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -12,7 +12,7 @@ export default function Universe() {
             <Lattice dimension={quanta.length}>
               {quanta.map((row, y) =>
                 row.map((state, x) => (
-                  <Quantum
+                  <Particle
                     key={`${y}-${x}`}
                     y={y}
                     x={x}

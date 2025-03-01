@@ -1,24 +1,24 @@
 import { useState } from "react"
 import { LIFE, DEATH, FIRST_DIMENSION } from "../constants"
-import { Quanta } from "../types"
-import { initQuanta } from "../utils"
+import { Particles } from "../types"
+import { initParticles } from "../utils"
 
 export interface Physics {
-  quanta: Quanta
+  quanta: Particles
   next: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<Quanta>>
+  violateCausality: React.Dispatch<React.SetStateAction<Particles>>
 }
 
 export const usePhysics = (firstDimension: number): Physics => {
-  const [quanta, setQuanta] = useState(() => initQuanta(firstDimension))
+  const [quanta, setQuanta] = useState(() => initParticles(firstDimension))
 
   const next = () => {
     const nextQuanta = quanta.map((row, y) => {
-      return row.map((quantum, x) => {
+      return row.map((particle, x) => {
         const observed = observe(y, x, quanta)
-        if (quantum === DEATH && observed === 3) return LIFE
-        if (quantum === LIFE && (observed < 2 || observed > 3)) return DEATH
-        return quantum
+        if (particle === DEATH && observed === 3) return LIFE
+        if (particle === LIFE && (observed < 2 || observed > 3)) return DEATH
+        return particle
       })
     })
     setQuanta(nextQuanta)
@@ -27,7 +27,7 @@ export const usePhysics = (firstDimension: number): Physics => {
   return { quanta, next, violateCausality: setQuanta }
 }
 
-const observe = (y: number, x: number, quanta: Quanta): number =>
+const observe = (y: number, x: number, quanta: Particles): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],

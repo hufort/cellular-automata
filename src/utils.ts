@@ -1,7 +1,7 @@
 import { DEATH } from "./constants"
-import { Quanta } from "./types"
+import { Particles } from "./types"
 
-export const initQuanta = (firstDimension: number): Quanta =>
+export const initParticles = (firstDimension: number): Particles =>
   Array.from({ length: firstDimension }, () =>
     new Array(firstDimension).fill(DEATH)
   )
