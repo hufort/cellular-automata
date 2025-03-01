@@ -5,7 +5,7 @@ import { initParticles } from "../utils"
 
 export interface Physics {
   particles: Particles
-  next: () => void
+  decay: () => void
   violateCausality: React.Dispatch<React.SetStateAction<Particles>>
 }
 
@@ -14,7 +14,7 @@ export const usePhysics = (firstDimension: number): Physics => {
     initParticles(firstDimension)
   )
 
-  const next = () => {
+  const decay = () => {
     const nextParticles = particles.map((row, y) => {
       return row.map((particle, x) => {
         const observed = observe(y, x, particles)
@@ -26,7 +26,7 @@ export const usePhysics = (firstDimension: number): Physics => {
     setParticles(nextParticles)
   }
 
-  return { particles, next, violateCausality: setParticles }
+  return { particles, decay, violateCausality: setParticles }
 }
 
 const observe = (y: number, x: number, particles: Particles): number =>

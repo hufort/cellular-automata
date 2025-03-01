@@ -7,8 +7,8 @@ import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ next, particles, violateCausality }: Physics) => {
-  const [isIncreasing, entropy] = useEntropy(next)
+export const Entropy = ({ decay, particles, violateCausality }: Physics) => {
+  const [isIncreasing, entropy] = useEntropy(decay)
 
   const snapshots = useRef<Particles[]>([])
 
@@ -30,7 +30,7 @@ export const Entropy = ({ next, particles, violateCausality }: Physics) => {
   const handleTick = () => {
     entropy(false)
     snapshots.current.push(particles)
-    next()
+    decay()
   }
 
   const handleClear = () => {
