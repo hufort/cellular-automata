@@ -1,4 +1,4 @@
-import { FIRST_DIMENSION } from "../constants"
+import { DIMENSION } from "../constants"
 import { usePhysics } from "../hooks"
 import { Physics as PhysicsInterface } from "../hooks/use-physics"
 
@@ -7,6 +7,6 @@ export interface PhysicsProps {
 }
 
 export const Physics = ({ children }: PhysicsProps) => {
-  const { order, decay, violateCausality } = usePhysics(FIRST_DIMENSION)
+  const { order, decay, violateCausality } = usePhysics(DIMENSION)
   return <>{children({ order, decay, violateCausality })}</>
 }

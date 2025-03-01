@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ON, OFF, FIRST_DIMENSION } from "../constants"
+import { ON, OFF, DIMENSION } from "../constants"
 import { Order } from "../types"
 import { initOrder } from "../utils"
 
@@ -36,8 +36,8 @@ const observe = (y: number, x: number, order: Order): number =>
   ].reduce((acc, [ox, oy]) => {
     const oY = y + oy
     const oX = x + ox
-    const inD1 = oY >= 0 && oY < FIRST_DIMENSION
-    const inD2 = oX >= 0 && oX < FIRST_DIMENSION
+    const inD1 = oY >= 0 && oY < DIMENSION
+    const inD2 = oX >= 0 && oX < DIMENSION
     const inSpace = inD1 && inD2
     const oCharge = inSpace ? order[oY][oX] : null
     return acc + (oCharge || 0)

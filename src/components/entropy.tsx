@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react"
-import { FIRST_DIMENSION, OFF } from "../constants"
+import { DIMENSION, OFF } from "../constants"
 import { useEntropy } from "../hooks"
 import { Order } from "../types"
 import { initOrder } from "../utils"
@@ -23,7 +23,7 @@ export const Entropy = ({ decay, order, violateCausality }: Physics) => {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
-      violateCausality(initOrder(FIRST_DIMENSION))
+      violateCausality(initOrder(DIMENSION))
     }
   }
 
@@ -36,7 +36,7 @@ export const Entropy = ({ decay, order, violateCausality }: Physics) => {
   const handleClear = () => {
     entropy(false)
     snapshots.current = []
-    violateCausality(initOrder(FIRST_DIMENSION))
+    violateCausality(initOrder(DIMENSION))
   }
 
   const extinct = order.every((row) => row.every((cell) => cell === OFF))
