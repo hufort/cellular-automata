@@ -7,13 +7,13 @@ import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
+export const Entropy = ({ next, particles, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(next)
 
   const snapshots = useRef<Particles[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(quanta)
+    if (!isIncreasing) snapshots.current.push(particles)
     entropy((f) => !f)
   }
 
@@ -29,7 +29,7 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
 
   const handleTick = () => {
     entropy(false)
-    snapshots.current.push(quanta)
+    snapshots.current.push(particles)
     next()
   }
 
@@ -39,7 +39,7 @@ export const Entropy = ({ next, quanta, violateCausality }: Physics) => {
     violateCausality(initParticles(FIRST_DIMENSION))
   }
 
-  const extinct = quanta.every((row) => row.every((cell) => cell === DEATH))
+  const extinct = particles.every((row) => row.every((cell) => cell === DEATH))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)

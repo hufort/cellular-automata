@@ -7,10 +7,10 @@ export default function Universe() {
     <div className="universe cmbr">
       <Title />
       <Physics>
-        {({ quanta, next, violateCausality }) => (
+        {({ particles, next, violateCausality }) => (
           <>
-            <Lattice dimension={quanta.length}>
-              {quanta.map((row, y) =>
+            <Lattice dimension={particles.length}>
+              {particles.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
                     key={`${y}-${x}`}
@@ -24,7 +24,7 @@ export default function Universe() {
             </Lattice>
             <Entropy
               next={next}
-              quanta={quanta}
+              particles={particles}
               violateCausality={violateCausality}
             />
           </>
