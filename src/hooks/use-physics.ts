@@ -10,17 +10,15 @@ export interface Physics {
 }
 
 export const usePhysics = (firstDimension: number): Physics => {
-  const [order, setOrder] = useState(() =>
-    initOrder(firstDimension)
-  )
+  const [order, setOrder] = useState(() => initOrder(firstDimension))
 
   const decay = () => {
     const nextOrder = order.map((row, y) => {
-      return row.map((particle, x) => {
+      return row.map((charge, x) => {
         const observed = observe(y, x, order)
-        if (particle === OFF && observed === 3) return ON
-        if (particle === ON && (observed < 2 || observed > 3)) return OFF
-        return particle
+        if (charge === OFF && observed === 3) return ON
+        if (charge === ON && (observed < 2 || observed > 3)) return OFF
+        return charge
       })
     })
     setOrder(nextOrder)
@@ -36,11 +34,11 @@ const observe = (y: number, x: number, order: Order): number =>
     [ 0, -1], /*y,x*/  [ 0, 1],
     [ 1, -1], [ 1, 0], [ 1, 1],
   ].reduce((acc, [ox, oy]) => {
-    const otherY = y + oy
-    const otherX = x + ox
-    const inD1 = otherY >= 0 && otherY < FIRST_DIMENSION
-    const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
+    const oY = y + oy
+    const oX = x + ox
+    const inD1 = oY >= 0 && oY < FIRST_DIMENSION
+    const inD2 = oX >= 0 && oX < FIRST_DIMENSION
     const inSpace = inD1 && inD2
-    const otherState = inSpace ? order[otherY][otherX] : null
-    return acc + (otherState || 0)
+    const oCharge = inSpace ? order[oY][oX] : null
+    return acc + (oCharge || 0)
   }, 0)

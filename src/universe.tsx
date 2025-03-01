@@ -11,12 +11,12 @@ export default function Universe() {
           <>
             <Field>
               {order.map((row, y) =>
-                row.map((state, x) => (
+                row.map((charge, x) => (
                   <Particle
                     key={`${y}-${x}`}
                     y={y}
                     x={x}
-                    state={state}
+                    charge={charge}
                     violateCausality={violateCausality}
                   />
                 ))
