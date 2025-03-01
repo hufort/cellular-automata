@@ -1,6 +1,6 @@
 import { OFF, ON, GENERATION_MS } from "../constants"
 import { Physics } from "../hooks/use-physics"
-import { Particle as ParticleType } from "../types"
+import { Charge as ParticleType } from "../types"
 
 import "./particle.css"
 
