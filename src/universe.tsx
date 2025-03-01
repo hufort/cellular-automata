@@ -23,8 +23,8 @@ export default function Universe() {
               )}
             </Field>
             <Entropy
-              transition={transition}
               order={order}
+              transition={transition}
               violateCausality={violateCausality}
             />
           </>

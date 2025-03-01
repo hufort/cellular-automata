@@ -7,7 +7,7 @@ import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ transition, order, violateCausality }: Physics) => {
+export const Entropy = ({ order, transition, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(transition)
 
   const snapshots = useRef<Order[]>([])
