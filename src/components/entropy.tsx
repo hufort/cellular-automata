@@ -1,19 +1,19 @@
 import { useRef, useEffect } from "react"
 import { FIRST_DIMENSION, OFF } from "../constants"
 import { useEntropy } from "../hooks"
-import { Particles } from "../types"
-import { initParticles } from "../utils"
+import { Order } from "../types"
+import { initOrder } from "../utils"
 import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ decay, particles, violateCausality }: Physics) => {
+export const Entropy = ({ decay, order, violateCausality }: Physics) => {
   const [isIncreasing, entropy] = useEntropy(decay)
 
-  const snapshots = useRef<Particles[]>([])
+  const snapshots = useRef<Order[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(particles)
+    if (!isIncreasing) snapshots.current.push(order)
     entropy((f) => !f)
   }
 
@@ -23,23 +23,23 @@ export const Entropy = ({ decay, particles, violateCausality }: Physics) => {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
-      violateCausality(initParticles(FIRST_DIMENSION))
+      violateCausality(initOrder(FIRST_DIMENSION))
     }
   }
 
   const handleTick = () => {
     entropy(false)
-    snapshots.current.push(particles)
+    snapshots.current.push(order)
     decay()
   }
 
   const handleClear = () => {
     entropy(false)
     snapshots.current = []
-    violateCausality(initParticles(FIRST_DIMENSION))
+    violateCausality(initOrder(FIRST_DIMENSION))
   }
 
-  const extinct = particles.every((row) => row.every((cell) => cell === OFF))
+  const extinct = order.every((row) => row.every((cell) => cell === OFF))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) entropy(false)

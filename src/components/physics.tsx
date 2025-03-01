@@ -7,6 +7,6 @@ export interface PhysicsProps {
 }
 
 export const Physics = ({ children }: PhysicsProps) => {
-  const { particles, decay, violateCausality } = usePhysics(FIRST_DIMENSION)
-  return <>{children({ particles, decay, violateCausality })}</>
+  const { order, decay, violateCausality } = usePhysics(FIRST_DIMENSION)
+  return <>{children({ order, decay, violateCausality })}</>
 }

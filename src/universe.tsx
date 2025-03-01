@@ -7,10 +7,10 @@ export default function Universe() {
     <div className="universe cmbr">
       <Title />
       <Physics>
-        {({ particles, decay, violateCausality }) => (
+        {({ order, decay, violateCausality }) => (
           <>
             <Field>
-              {particles.map((row, y) =>
+              {order.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
                     key={`${y}-${x}`}
@@ -24,7 +24,7 @@ export default function Universe() {
             </Field>
             <Entropy
               decay={decay}
-              particles={particles}
+              order={order}
               violateCausality={violateCausality}
             />
           </>

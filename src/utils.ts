@@ -1,7 +1,7 @@
 import { OFF } from "./constants"
-import { Particles } from "./types"
+import { Order } from "./types"
 
-export const initParticles = (firstDimension: number): Particles =>
+export const initOrder = (firstDimension: number): Order =>
   Array.from({ length: firstDimension }, () =>
     new Array(firstDimension).fill(OFF)
   )

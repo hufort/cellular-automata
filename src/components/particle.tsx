@@ -18,8 +18,8 @@ export const Particle = ({
   violateCausality,
 }: ParticleProperties) => {
   const toggleExistence = () =>
-    violateCausality((physics) => {
-      const nextSpace = [...physics]
+    violateCausality((currentOrder) => {
+      const nextSpace = [...currentOrder]
       nextSpace[y][x] = state === ON ? OFF : ON
       return nextSpace
     })

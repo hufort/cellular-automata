@@ -1,35 +1,35 @@
 import { useState } from "react"
 import { ON, OFF, FIRST_DIMENSION } from "../constants"
-import { Particles } from "../types"
-import { initParticles } from "../utils"
+import { Order } from "../types"
+import { initOrder } from "../utils"
 
 export interface Physics {
-  particles: Particles
+  order: Order
   decay: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<Particles>>
+  violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
 export const usePhysics = (firstDimension: number): Physics => {
-  const [particles, setParticles] = useState(() =>
-    initParticles(firstDimension)
+  const [order, setOrder] = useState(() =>
+    initOrder(firstDimension)
   )
 
   const decay = () => {
-    const nextParticles = particles.map((row, y) => {
+    const nextOrder = order.map((row, y) => {
       return row.map((particle, x) => {
-        const observed = observe(y, x, particles)
+        const observed = observe(y, x, order)
         if (particle === OFF && observed === 3) return ON
         if (particle === ON && (observed < 2 || observed > 3)) return OFF
         return particle
       })
     })
-    setParticles(nextParticles)
+    setOrder(nextOrder)
   }
 
-  return { particles, decay, violateCausality: setParticles }
+  return { order, decay, violateCausality: setOrder }
 }
 
-const observe = (y: number, x: number, particles: Particles): number =>
+const observe = (y: number, x: number, order: Order): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
@@ -41,6 +41,6 @@ const observe = (y: number, x: number, particles: Particles): number =>
     const inD1 = otherY >= 0 && otherY < FIRST_DIMENSION
     const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
     const inSpace = inD1 && inD2
-    const otherState = inSpace ? particles[otherY][otherX] : null
+    const otherState = inSpace ? order[otherY][otherX] : null
     return acc + (otherState || 0)
   }, 0)
