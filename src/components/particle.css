@@ -18,11 +18,11 @@
   transform: translateZ(0);
 }
 
-.particle.life {
+.particle.on {
   background: var(--color-accent-base);
   box-shadow: var(--elevation-high);
 }
 
-.particle.life:hover {
+.particle.on:hover {
   box-shadow: var(--glow-high), 0 0 0 1px var(--border-medium);
 }

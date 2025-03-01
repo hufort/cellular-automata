@@ -1,4 +1,4 @@
-import { OFF, ON, GENERATION_MS } from "../constants"
+import { OFF, ON } from "../constants"
 import { Physics } from "../hooks/use-physics"
 import { Charge } from "../types"
 
@@ -26,11 +26,8 @@ export const Particle = ({
 
   return (
     <button
-      className={`particle ${charge === ON ? "life" : "death"}`}
+      className={`particle ${charge === ON ? "on" : "off"}`}
       onClick={toggleExistence}
-      style={{
-        transition: `border-radius ease-in-out ${GENERATION_MS}ms, border-radius ease-in-out ${GENERATION_MS}ms`,
-      }}
     />
   )
 }
