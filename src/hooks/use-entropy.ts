@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { GENERATION_MS } from "../constants"
+import { ENTROPIC_STEP } from "../constants"
 import { Physics } from "./use-physics"
 
 export const useEntropy = (
@@ -9,7 +9,7 @@ export const useEntropy = (
 
   useEffect(() => {
     let id: NodeJS.Timeout
-    if (isIncreasing) id = setInterval(decay, GENERATION_MS)
+    if (isIncreasing) id = setInterval(decay, ENTROPIC_STEP)
     return () => clearInterval(id)
   }, [isIncreasing, decay])
 
