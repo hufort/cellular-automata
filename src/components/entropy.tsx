@@ -7,18 +7,18 @@ import { type Physics } from "../hooks/use-physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ decay, order, violateCausality }: Physics) => {
-  const [isIncreasing, entropy] = useEntropy(decay)
+export const Entropy = ({ order, transition, violateCausality }: Physics) => {
+  const [entropy, setEntropy] = useEntropy(transition)
 
   const snapshots = useRef<Order[]>([])
 
   const toggleEntropy = () => {
-    if (!isIncreasing) snapshots.current.push(order)
-    entropy((f) => !f)
+    if (!entropy) snapshots.current.push(order)
+    setEntropy((f) => !f)
   }
 
   const handleReset = () => {
-    entropy(false)
+    setEntropy(false)
     if (snapshots.current.length > 0) {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
@@ -28,13 +28,13 @@ export const Entropy = ({ decay, order, violateCausality }: Physics) => {
   }
 
   const handleTick = () => {
-    entropy(false)
+    setEntropy(false)
     snapshots.current.push(order)
-    decay()
+    transition()
   }
 
   const handleClear = () => {
-    entropy(false)
+    setEntropy(false)
     snapshots.current = []
     violateCausality(initOrder(DIMENSION))
   }
@@ -42,13 +42,13 @@ export const Entropy = ({ decay, order, violateCausality }: Physics) => {
   const extinct = order.every((row) => row.every((cell) => cell === OFF))
 
   useEffect(() => {
-    if (extinct && snapshots.current.length > 0) entropy(false)
-  }, [extinct, snapshots, entropy])
+    if (extinct && snapshots.current.length > 0) setEntropy(false)
+  }, [extinct, snapshots, setEntropy])
 
   return (
     <div className="entropy">
       <button disabled={extinct} onClick={toggleEntropy}>
-        {isIncreasing ? "stop" : "start"}
+        {entropy ? "stop" : "start"}
       </button>
       <button disabled={extinct} onClick={handleTick}>
         tick

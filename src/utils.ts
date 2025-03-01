@@ -1,7 +1,5 @@
 import { OFF } from "./constants"
 import { Order } from "./types"
 
-export const initOrder = (firstDimension: number): Order =>
-  Array.from({ length: firstDimension }, () =>
-    new Array(firstDimension).fill(OFF)
-  )
+export const initOrder = (dimension: number): Order =>
+  Array.from({ length: dimension }, () => new Array(dimension).fill(OFF))

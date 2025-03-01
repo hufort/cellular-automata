@@ -5,26 +5,26 @@ import { initOrder } from "../utils"
 
 export interface Physics {
   order: Order
-  decay: () => void
+  transition: () => void
   violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
-export const usePhysics = (firstDimension: number): Physics => {
-  const [order, setOrder] = useState(() => initOrder(firstDimension))
+export const usePhysics = (dimension: number): Physics => {
+  const [order, setOrder] = useState(() => initOrder(dimension))
 
-  const decay = () => {
-    const nextOrder = order.map((row, y) => {
-      return row.map((charge, x) => {
-        const observed = observe(y, x, order)
-        if (charge === OFF && observed === 3) return ON
-        if (charge === ON && (observed < 2 || observed > 3)) return OFF
-        return charge
-      })
-    })
-    setOrder(nextOrder)
-  }
+  const transition = () =>
+    setOrder((order) =>
+      order.map((row, y) =>
+        row.map((charge, x) => {
+          const observed = observe(y, x, order)
+          if (charge === OFF && observed === 3) return ON
+          if (charge === ON && (observed < 2 || observed > 3)) return OFF
+          return charge
+        })
+      )
+    )
 
-  return { order, decay, violateCausality: setOrder }
+  return { order, transition, violateCausality: setOrder }
 }
 
 const observe = (y: number, x: number, order: Order): number =>
