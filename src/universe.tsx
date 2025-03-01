@@ -1,6 +1,6 @@
 import "./universe.css"
 
-import { Physics, Particle, Lattice, Entropy, Title } from "./components"
+import { Physics, Particle, Field, Entropy, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -9,7 +9,7 @@ export default function Universe() {
       <Physics>
         {({ particles, next, violateCausality }) => (
           <>
-            <Lattice dimension={particles.length}>
+            <Field dimension={particles.length}>
               {particles.map((row, y) =>
                 row.map((state, x) => (
                   <Particle
@@ -21,7 +21,7 @@ export default function Universe() {
                   />
                 ))
               )}
-            </Lattice>
+            </Field>
             <Entropy
               next={next}
               particles={particles}

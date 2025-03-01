@@ -1,8 +1,8 @@
 import React from "react"
 
-import "./lattice.css"
+import "./field.css"
 
-export const Lattice = ({
+export const Field = ({
   children,
   dimension,
 }: {
@@ -10,7 +10,7 @@ export const Lattice = ({
   dimension: number
 }) => (
   <div
-    className="lattice"
+    className="field"
     style={{
       gridTemplateColumns: `repeat(${dimension}, 1rem)`,
       gridTemplateRows: `repeat(${dimension}, 1rem)`,
