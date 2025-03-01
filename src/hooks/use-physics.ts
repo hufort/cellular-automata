@@ -42,5 +42,5 @@ const observe = (y: number, x: number, particles: Particles): number =>
     const inD2 = otherX >= 0 && otherX < FIRST_DIMENSION
     const inSpace = inD1 && inD2
     const otherState = inSpace ? particles[otherY][otherX] : null
-    return acc + (otherState === ON ? 1 : 0)
+    return acc + (otherState || 0)
   }, 0)
