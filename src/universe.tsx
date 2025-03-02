@@ -7,18 +7,10 @@ export default function Universe() {
     <div className="universe cmbr">
       <Title />
       <Physics>
-        {({ order, transition, violateCausality }) => (
-          <>
-            <Field>
-              <Matter order={order} violateCausality={violateCausality} />
-            </Field>
-            <Entropy
-              order={order}
-              transition={transition}
-              violateCausality={violateCausality}
-            />
-          </>
-        )}
+        <Field>
+          <Matter />
+        </Field>
+        <Entropy />
       </Physics>
     </div>
   )

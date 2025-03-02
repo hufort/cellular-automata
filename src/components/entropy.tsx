@@ -3,11 +3,12 @@ import { DIMENSION, OFF } from "../constants"
 import { useEntropy } from "../hooks"
 import { Order } from "../types"
 import { initOrder } from "../utils"
-import { type Physics } from "../hooks/use-initial-conditions"
+import { usePhysics } from "./physics"
 
 import "./entropy.css"
 
-export const Entropy = ({ order, transition, violateCausality }: Physics) => {
+export const Entropy = () => {
+  const { order, transition, violateCausality } = usePhysics()
   const [entropy, setEntropy] = useEntropy(transition)
 
   const snapshots = useRef<Order[]>([])

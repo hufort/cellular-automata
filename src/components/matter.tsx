@@ -1,13 +1,9 @@
-import { Order } from "../types"
-import { Physics } from "../hooks/use-initial-conditions"
 import { Particle } from "./particle"
+import { usePhysics } from "./physics"
 
-export interface MatterProps {
-  order: Order
-  violateCausality: Physics["violateCausality"]
-}
-
-export const Matter = ({ order, violateCausality }: MatterProps) => {
+export const Matter = () => {
+  const { order, violateCausality } = usePhysics()
+  
   return (
     <>
       {order.map((row, y) =>
