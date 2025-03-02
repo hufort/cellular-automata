@@ -3,7 +3,7 @@ import { DIMENSION, OFF } from "../constants"
 import { useEntropy } from "../hooks"
 import { Order } from "../types"
 import { initOrder } from "../utils"
-import { type Physics } from "../hooks/use-physics"
+import { type Physics } from "../hooks/use-initial-conditions"
 
 import "./entropy.css"
 

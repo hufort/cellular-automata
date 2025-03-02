@@ -9,7 +9,7 @@ export interface Physics {
   violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
-export const usePhysics = (dimension: number): Physics => {
+export const useInitialConditions = (dimension: number): Physics => {
   const [order, setOrder] = useState(() => initOrder(dimension))
 
   const transition = () =>

@@ -1,12 +1,12 @@
 import { DIMENSION } from "../constants"
-import { usePhysics } from "../hooks"
-import { Physics as PhysicsInterface } from "../hooks/use-physics"
+import { useInitialConditions } from "../hooks"
+import { Physics as PhysicsInterface } from "../hooks/use-initial-conditions"
 
 export interface PhysicsProps {
   children: (props: PhysicsInterface) => React.ReactNode
 }
 
 export const Physics = ({ children }: PhysicsProps) => {
-  const { order, transition, violateCausality } = usePhysics(DIMENSION)
+  const { order, transition, violateCausality } = useInitialConditions(DIMENSION)
   return <>{children({ order, transition, violateCausality })}</>
 }
