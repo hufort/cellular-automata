@@ -1,6 +1,6 @@
 import "./universe.css"
 
-import { Physics, Particle, Field, Entropy, Title } from "./components"
+import { Physics, Field, Entropy, Title, Matter } from "./components"
 
 export default function Universe() {
   return (
@@ -10,17 +10,7 @@ export default function Universe() {
         {({ order, transition, violateCausality }) => (
           <>
             <Field>
-              {order.map((row, y) =>
-                row.map((charge, x) => (
-                  <Particle
-                    key={`${y}-${x}`}
-                    y={y}
-                    x={x}
-                    charge={charge}
-                    violateCausality={violateCausality}
-                  />
-                ))
-              )}
+              <Matter order={order} violateCausality={violateCausality} />
             </Field>
             <Entropy
               order={order}

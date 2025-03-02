@@ -1,5 +1,6 @@
 export { Entropy } from "./entropy"
 export { Field } from "./field"
+export { Matter } from "./matter"
 export { Physics } from "./physics"
 export { Particle } from "./particle"
 export { Title } from "./title"
