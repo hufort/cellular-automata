@@ -1,8 +1,16 @@
-import { useEntropyContext } from "./entropy"
+import { useEntropyContext } from "../contexts/entropy"
 import "./entropic-controller.css"
 
 export const EntropicController = () => {
-  const { entropy, toggleEntropy, handleReset, handleTick, handleClear, extinct, snapshots } = useEntropyContext()
+  const {
+    entropy,
+    toggleEntropy,
+    handleReset,
+    handleTick,
+    handleClear,
+    extinct,
+    snapshots,
+  } = useEntropyContext()
 
   return (
     <div className="entropy">

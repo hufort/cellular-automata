@@ -25,7 +25,7 @@ export const Entropy = ({ children }: EntropyProps) => {
   const { order, transition, violateCausality } = usePhysics()
   const [entropy, setEntropy] = useEntropy(transition)
   const snapshots = useRef<Order[]>([])
-  
+
   const toggleEntropy = () => {
     if (!entropy) snapshots.current.push(order)
     setEntropy((f) => !f)
@@ -66,13 +66,11 @@ export const Entropy = ({ children }: EntropyProps) => {
     handleTick,
     handleClear,
     extinct,
-    snapshots
+    snapshots,
   }
 
   return (
-    <EntropyContext.Provider value={value}>
-      {children}
-    </EntropyContext.Provider>
+    <EntropyContext.Provider value={value}>{children}</EntropyContext.Provider>
   )
 }
 

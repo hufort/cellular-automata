@@ -1,9 +1,9 @@
 import { Particle } from "./particle"
-import { usePhysics } from "./physics"
+import { usePhysics } from "../contexts/physics"
 
 export const Matter = () => {
   const { order, violateCausality } = usePhysics()
-  
+
   return (
     <>
       {order.map((row, y) =>
