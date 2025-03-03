@@ -1,13 +1,11 @@
-import { createContext, useContext } from "react"
-import { Physics } from "../contexts/physics"
-
-export const PhysicsContext = createContext<Physics | null>(null)
+import { useContext } from "react"
+import { Physics, PhysicsContext } from "../contexts"
 
 export const usePhysics = (): Physics => {
   const context = useContext(PhysicsContext)
 
   if (context === null) {
-    throw new Error("usePhysics must be used within a Physics provider")
+    throw new Error("usePhysics must be used within a PhysicsProvider")
   }
 
   return context

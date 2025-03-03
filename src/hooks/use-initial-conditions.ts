@@ -2,7 +2,7 @@ import { useState } from "react"
 import { ON, OFF, DIMENSION } from "../constants"
 import { Order } from "../types"
 import { initOrder } from "../utils"
-import { Physics } from "../contexts/physics"
+import { Physics } from "../contexts"
 
 export const useInitialConditions = (dimension: number): Physics => {
   const [order, setOrder] = useState(() => initOrder(dimension))
