@@ -1,4 +1,5 @@
-export { Entropy } from "./entropy"
+export { EntropicController } from "./entropic-controller"
+export { Entropy, useEntropyContext } from "./entropy"
 export { Field } from "./field"
 export { Matter } from "./matter"
 export { Physics, usePhysics } from "./physics"

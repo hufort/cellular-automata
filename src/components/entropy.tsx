@@ -1,18 +1,31 @@
-import { useRef, useEffect } from "react"
-import { DIMENSION, OFF } from "../constants"
+import { createContext, useContext, ReactNode, useRef, useEffect } from "react"
 import { useEntropy } from "../hooks"
+import { usePhysics } from "./physics"
+import { DIMENSION, OFF } from "../constants"
 import { Order } from "../types"
 import { initOrder } from "../utils"
-import { usePhysics } from "./physics"
 
-import "./entropy.css"
+interface EntropyContextType {
+  entropy: boolean
+  toggleEntropy: () => void
+  handleReset: () => void
+  handleTick: () => void
+  handleClear: () => void
+  extinct: boolean
+  snapshots: React.MutableRefObject<Order[]>
+}
 
-export const Entropy = () => {
+const EntropyContext = createContext<EntropyContextType | null>(null)
+
+export interface EntropyProps {
+  children: ReactNode
+}
+
+export const Entropy = ({ children }: EntropyProps) => {
   const { order, transition, violateCausality } = usePhysics()
   const [entropy, setEntropy] = useEntropy(transition)
-
   const snapshots = useRef<Order[]>([])
-
+  
   const toggleEntropy = () => {
     if (!entropy) snapshots.current.push(order)
     setEntropy((f) => !f)
@@ -46,23 +59,27 @@ export const Entropy = () => {
     if (extinct && snapshots.current.length > 0) setEntropy(false)
   }, [extinct, snapshots, setEntropy])
 
+  const value = {
+    entropy,
+    toggleEntropy,
+    handleReset,
+    handleTick,
+    handleClear,
+    extinct,
+    snapshots
+  }
+
   return (
-    <div className="entropy">
-      <button disabled={extinct} onClick={toggleEntropy}>
-        {entropy ? "stop" : "start"}
-      </button>
-      <button disabled={extinct} onClick={handleTick}>
-        tick
-      </button>
-      <button
-        disabled={extinct && snapshots.current.length === 0}
-        onClick={handleReset}
-      >
-        reset
-      </button>
-      <button disabled={extinct} onClick={handleClear}>
-        clear
-      </button>
-    </div>
+    <EntropyContext.Provider value={value}>
+      {children}
+    </EntropyContext.Provider>
   )
+}
+
+export const useEntropyContext = (): EntropyContextType => {
+  const context = useContext(EntropyContext)
+  if (context === null) {
+    throw new Error("useEntropyContext must be used within an Entropy provider")
+  }
+  return context
 }
