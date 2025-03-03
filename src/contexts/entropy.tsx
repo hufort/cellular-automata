@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode, useRef, useEffect } from "react"
-import { useEntropy } from "../hooks"
-import { usePhysics } from "./physics"
+import { useEntropy, usePhysics } from "../hooks"
+
 import { DIMENSION, OFF } from "../constants"
 import { Order } from "../types"
 import { initOrder } from "../utils"

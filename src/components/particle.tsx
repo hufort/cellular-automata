@@ -1,5 +1,5 @@
 import { OFF, ON } from "../constants"
-import { Physics } from "../hooks/use-initial-conditions"
+import { Physics } from "../contexts/physics"
 import { Charge } from "../types"
 
 import "./particle.css"

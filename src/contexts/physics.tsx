@@ -1,28 +1,21 @@
-import { createContext, useContext, ReactNode } from "react"
+import { ReactNode } from "react"
 import { DIMENSION } from "../constants"
 import { useInitialConditions } from "../hooks"
-import { Physics as PhysicsInterface } from "../hooks/use-initial-conditions"
+import { Order } from "../types"
+import { PhysicsContext } from "../hooks/use-physics"
 
-const PhysicsContext = createContext<PhysicsInterface | null>(null)
-
-export interface PhysicsProps {
-  children: ReactNode
+export interface Physics {
+  order: Order
+  transition: () => void
+  violateCausality: React.Dispatch<React.SetStateAction<Order>>
 }
 
-export const Physics = ({ children }: PhysicsProps) => {
-  const physicsState = useInitialConditions(DIMENSION)
-  
+export const Physics = ({ children }: { children: ReactNode }) => {
+  const physics = useInitialConditions(DIMENSION)
+
   return (
-    <PhysicsContext.Provider value={physicsState}>
+    <PhysicsContext.Provider value={physics}>
       {children}
     </PhysicsContext.Provider>
   )
-}
-
-export const usePhysics = (): PhysicsInterface => {
-  const context = useContext(PhysicsContext)
-  if (context === null) {
-    throw new Error("usePhysics must be used within a Physics provider")
-  }
-  return context
 }
