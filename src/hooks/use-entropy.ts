@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { ENTROPIC_STEP } from "../constants"
-import { Physics } from "./use-physics"
+import { Physics } from "../contexts"
 
 export const useEntropy = (
   transition: Physics["transition"]

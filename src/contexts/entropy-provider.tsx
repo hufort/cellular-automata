@@ -1,27 +1,16 @@
-import { createContext, useContext, ReactNode, useRef, useEffect } from "react"
+import { ReactNode, useRef, useEffect } from "react"
 import { useEntropy, usePhysics } from "../hooks"
+import { EntropyContext } from "./entropy-context"
 
 import { DIMENSION, OFF } from "../constants"
 import { Order } from "../types"
 import { initOrder } from "../utils"
 
-interface EntropyContextType {
-  entropy: boolean
-  toggleEntropy: () => void
-  handleReset: () => void
-  handleTick: () => void
-  handleClear: () => void
-  extinct: boolean
-  snapshots: React.MutableRefObject<Order[]>
-}
-
-const EntropyContext = createContext<EntropyContextType | null>(null)
-
 export interface EntropyProps {
   children: ReactNode
 }
 
-export const Entropy = ({ children }: EntropyProps) => {
+export const EntropyProvider = ({ children }: EntropyProps) => {
   const { order, transition, violateCausality } = usePhysics()
   const [entropy, setEntropy] = useEntropy(transition)
   const snapshots = useRef<Order[]>([])
@@ -72,12 +61,4 @@ export const Entropy = ({ children }: EntropyProps) => {
   return (
     <EntropyContext.Provider value={value}>{children}</EntropyContext.Provider>
   )
-}
-
-export const useEntropyContext = (): EntropyContextType => {
-  const context = useContext(EntropyContext)
-  if (context === null) {
-    throw new Error("useEntropyContext must be used within an Entropy provider")
-  }
-  return context
 }

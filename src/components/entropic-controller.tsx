@@ -1,4 +1,4 @@
-import { useEntropyContext } from "../contexts/entropy"
+import { useEntropyContext } from "../hooks"
 import "./entropic-controller.css"
 
 export const EntropicController = () => {
