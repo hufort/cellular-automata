@@ -6,9 +6,9 @@ import { Order } from "../types"
 import { initOrder } from "../utils"
 
 import { useEntropy } from "../hooks"
-import "./entropic-controller.css"
+import "./violate-causality.css"
 
-export const EntropicController = () => {
+export const ViolateCausality = () => {
   const { order, transition, violateCausality } = usePhysics()
   const { entropy, setEntropy } = useEntropy()
   const snapshots = useRef<Order[]>([])

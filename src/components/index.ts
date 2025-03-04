@@ -1,4 +1,4 @@
-export { EntropicController } from "./entropic-controller"
+export { ViolateCausality } from "./violate-causality"
 export { Field } from "./field"
 export { Matter } from "./matter"
 export { Particle } from "./particle"

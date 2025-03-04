@@ -1,7 +1,7 @@
 import "./universe.css"
 
 import { EntropyProvider, PhysicsProvider } from "./contexts"
-import { EntropicController, Field, Matter, Title } from "./components"
+import { ViolateCausality, Field, Matter, Title } from "./components"
 
 export default function Universe() {
   return (
@@ -12,7 +12,7 @@ export default function Universe() {
           <Field>
             <Matter />
           </Field>
-          <EntropicController />
+          <ViolateCausality />
         </EntropyProvider>
       </PhysicsProvider>
     </div>
