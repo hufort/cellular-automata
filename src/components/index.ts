@@ -1,7 +1,5 @@
 export { EntropicController } from "./entropic-controller"
-export { EntropyProvider as Entropy } from "../contexts"
 export { Field } from "./field"
 export { Matter } from "./matter"
-export { PhysicsProvider as Physics } from "../contexts"
 export { Particle } from "./particle"
 export { Title } from "./title"

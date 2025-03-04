@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react"
-import { ENTROPIC_STEP } from "../constants"
-import { Physics } from "../contexts"
+import { useContext } from "react"
+import { EntropyContext, EntropyContextType } from "../contexts"
 
-export const useEntropy = (
-  transition: Physics["transition"]
-): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
-  const [entropy, setEntropy] = useState(false)
-
-  useEffect(() => {
-    let id: NodeJS.Timeout
-    if (entropy) id = setInterval(transition, ENTROPIC_STEP)
-    return () => clearInterval(id)
-  }, [entropy, transition])
-
-  return [entropy, setEntropy]
+export const useEntropy = (): EntropyContextType => {
+  const context = useContext(EntropyContext)
+  if (context === null) {
+    throw new Error("useEntropy must be used within an EntropyProvider")
+  }
+  return context
 }

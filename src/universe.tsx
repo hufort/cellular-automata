@@ -1,19 +1,19 @@
 import "./universe.css"
 
-import { Entropy, Field, EntropicController, Title, Matter } from "./components"
-import { PhysicsProvider } from "./contexts"
+import { EntropyProvider, PhysicsProvider } from "./contexts"
+import { EntropicController, Field, Matter, Title } from "./components"
 
 export default function Universe() {
   return (
     <div className="universe cmbr">
       <Title />
       <PhysicsProvider>
-        <Entropy>
+        <EntropyProvider>
           <Field>
             <Matter />
           </Field>
           <EntropicController />
-        </Entropy>
+        </EntropyProvider>
       </PhysicsProvider>
     </div>
   )
