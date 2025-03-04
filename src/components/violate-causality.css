@@ -1,9 +1,9 @@
-.entropy {
+.violate-causality {
   display: flex;
   gap: 16px;
 }
 
-.entropy button {
+.violate-causality button {
   appearance: none;
   background: transparent;
   border: none;
@@ -20,20 +20,20 @@
   min-width: 56px;
 }
 
-.entropy button:hover {
+.violate-causality button:hover {
   background: var(--color-interactive-hover);
   box-shadow: var(--elevation-medium);
   text-shadow: var(--text-glow-high);
 }
 
-.entropy button:active {
+.violate-causality button:active {
   background: var(--color-interactive-active);
   box-shadow: var(--elevation-low);
   text-shadow: none;
   transform: translateY(1px);
 }
 
-.entropy button:disabled {
+.violate-causality button:disabled {
   background: none;
   color: var(--color-fg-muted);
   cursor: not-allowed;
@@ -44,18 +44,18 @@
   color: var(--color-fg-subtle);
 }
 
-.entropy button.destroy:hover {
+.violate-causality button.destroy:hover {
   box-shadow: var(--elevation-high);
   text-shadow: var(--text-glow-high);
 }
 
-.entropy button.destroy:active {
+.violate-causality button.destroy:active {
   box-shadow: var(--elevation-medium);
   text-shadow: none;
   transform: translateY(1px);
 }
 
-.entropy button.destroy:disabled {
+.violate-causality button.destroy:disabled {
   color: var(--color-fg-muted);
   cursor: not-allowed;
   border-color: var(--border-subtle);

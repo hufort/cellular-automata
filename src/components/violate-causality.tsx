@@ -47,7 +47,7 @@ export const ViolateCausality = () => {
   }, [extinct, snapshots, setEntropy])
 
   return (
-    <div className="entropy">
+    <div className="violate-causality">
       <button disabled={extinct} onClick={toggleEntropy}>
         {entropy ? "stop" : "start"}
       </button>
