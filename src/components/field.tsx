@@ -1,6 +1,5 @@
 import React from "react"
 import { DIMENSION } from "../constants"
-
 import "./field.css"
 
 export const Field = ({ children }: { children: React.ReactNode }) => (

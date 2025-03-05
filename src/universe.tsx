@@ -1,7 +1,6 @@
-import "./universe.css"
-
 import { EntropyProvider, PhysicsProvider } from "./contexts"
 import { ViolateCausality, Field, Matter, Title } from "./components"
+import "./universe.css"
 
 export default function Universe() {
   return (

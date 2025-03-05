@@ -1,11 +1,8 @@
 import { useRef, useEffect } from "react"
-import { usePhysics } from "../hooks"
-
+import { useEntropy, usePhysics } from "../hooks"
+import { initOrder } from "../utils"
 import { DIMENSION, OFF } from "../constants"
 import { Order } from "../types"
-import { initOrder } from "../utils"
-
-import { useEntropy } from "../hooks"
 import "./violate-causality.css"
 
 export const ViolateCausality = () => {
