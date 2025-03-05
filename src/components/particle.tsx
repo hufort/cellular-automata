@@ -1,7 +1,6 @@
 import { OFF, ON } from "../constants"
-import { Physics } from "../hooks/use-physics"
+import { Physics } from "../contexts"
 import { Charge } from "../types"
-
 import "./particle.css"
 
 export interface ParticleProperties {

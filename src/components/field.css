@@ -4,7 +4,7 @@
   max-height: calc(100vw - 2rem);
   overflow: auto;
   display: grid;
-  gap: 2px;
+  gap: 1px;
   padding: 0.15rem;
   background: var(--color-bg-base);
   box-shadow: var(--elevation-low);

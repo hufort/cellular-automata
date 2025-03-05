@@ -1,20 +1,18 @@
 import { useRef, useEffect } from "react"
-import { DIMENSION, OFF } from "../constants"
-import { useEntropy } from "../hooks"
-import { Order } from "../types"
+import { useEntropy, usePhysics } from "../hooks"
 import { initOrder } from "../utils"
-import { type Physics } from "../hooks/use-physics"
+import { DIMENSION, OFF } from "../constants"
+import { Order } from "../types"
+import "./violate-causality.css"
 
-import "./entropy.css"
-
-export const Entropy = ({ order, transition, violateCausality }: Physics) => {
-  const [entropy, setEntropy] = useEntropy(transition)
-
+export const ViolateCausality = () => {
+  const { order, transition, violateCausality } = usePhysics()
+  const { entropy, setEntropy } = useEntropy()
   const snapshots = useRef<Order[]>([])
 
   const toggleEntropy = () => {
     if (!entropy) snapshots.current.push(order)
-    setEntropy((f) => !f)
+    setEntropy((e) => !e)
   }
 
   const handleReset = () => {
@@ -39,14 +37,14 @@ export const Entropy = ({ order, transition, violateCausality }: Physics) => {
     violateCausality(initOrder(DIMENSION))
   }
 
-  const extinct = order.every((row) => row.every((cell) => cell === OFF))
+  const extinct = order.every((row) => row.every((charge) => charge === OFF))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) setEntropy(false)
   }, [extinct, snapshots, setEntropy])
 
   return (
-    <div className="entropy">
+    <div className="violate-causality">
       <button disabled={extinct} onClick={toggleEntropy}>
         {entropy ? "stop" : "start"}
       </button>

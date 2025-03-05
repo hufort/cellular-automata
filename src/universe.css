@@ -7,7 +7,7 @@
   padding-top: 56px;
 }
 
-.cmbr {
+.CMBR {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@
   transform: translateZ(0);
 }
 
-.cmbr:before {
+.CMBR:before {
   content: "";
   top: -10rem;
   left: -10rem;
