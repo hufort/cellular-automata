@@ -1,10 +1,10 @@
 import { createContext } from "react"
-import { Order } from "../types"
+import { FieldState } from "../types"
 
 export interface Physics {
-  order: Order
+  field: FieldState
   transition: () => void
-  violateCausality: React.Dispatch<React.SetStateAction<Order>>
+  violateCausality: React.Dispatch<React.SetStateAction<FieldState>>
 }
 
 export const PhysicsContext = createContext<Physics | null>(null)

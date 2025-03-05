@@ -2,11 +2,11 @@ import { Particle } from "./particle"
 import { usePhysics } from "../hooks"
 
 export const Matter = () => {
-  const { order, violateCausality } = usePhysics()
+  const { field, violateCausality } = usePhysics()
 
   return (
     <>
-      {order.map((row, y) =>
+      {field.map((row, y) =>
         row.map((charge, x) => (
           <Particle
             key={`${y}-${x}`}

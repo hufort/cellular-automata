@@ -1,5 +1,5 @@
 import { OFF } from "./constants"
-import { Order } from "./types"
+import { FieldState } from "./types"
 
-export const initOrder = (dimension: number): Order =>
+export const initField = (dimension: number): FieldState =>
   Array.from({ length: dimension }, () => new Array(dimension).fill(OFF))

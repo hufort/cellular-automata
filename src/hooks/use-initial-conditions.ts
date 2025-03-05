@@ -1,17 +1,17 @@
 import { useState } from "react"
 import { ON, OFF, DIMENSION } from "../constants"
-import { Order } from "../types"
-import { initOrder } from "../utils"
+import { FieldState } from "../types"
+import { initField } from "../utils"
 import { Physics } from "../contexts"
 
 export const useInitialConditions = (dimension: number): Physics => {
-  const [order, setOrder] = useState(() => initOrder(dimension))
+  const [field, setField] = useState(() => initField(dimension))
 
   const transition = () =>
-    setOrder((order) =>
-      order.map((row, y) =>
+    setField((field) =>
+      field.map((row, y) =>
         row.map((charge, x) => {
-          const observed = observe(y, x, order)
+          const observed = observe(y, x, field)
           if (charge === OFF && observed === 3) return ON
           if (charge === ON && (observed < 2 || observed > 3)) return OFF
           return charge
@@ -19,10 +19,10 @@ export const useInitialConditions = (dimension: number): Physics => {
       )
     )
 
-  return { order, transition, violateCausality: setOrder }
+  return { field, transition, violateCausality: setField }
 }
 
-const observe = (y: number, x: number, order: Order): number =>
+const observe = (y: number, x: number, field: FieldState): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
@@ -34,6 +34,6 @@ const observe = (y: number, x: number, order: Order): number =>
     const inD1 = oY >= 0 && oY < DIMENSION
     const inD2 = oX >= 0 && oX < DIMENSION
     const inSpace = inD1 && inD2
-    const oCharge = inSpace ? order[oY][oX] : null
+    const oCharge = inSpace ? field[oY][oX] : null
     return acc + (oCharge || 0)
   }, 0)

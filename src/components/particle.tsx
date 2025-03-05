@@ -17,10 +17,10 @@ export const Particle = ({
   violateCausality,
 }: ParticleProperties) => {
   const toggleExistence = () =>
-    violateCausality((currentOrder) => {
-      const nextSpace = [...currentOrder]
-      nextSpace[y][x] = charge === ON ? OFF : ON
-      return nextSpace
+    violateCausality((currentField) => {
+      const nextField = [...currentField]
+      nextField[y][x] = charge === ON ? OFF : ON
+      return nextField
     })
 
   return (
