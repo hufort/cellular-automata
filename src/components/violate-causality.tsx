@@ -12,7 +12,7 @@ export const ViolateCausality = () => {
 
   const toggleEntropy = () => {
     if (!entropy) snapshots.current.push(order)
-    setEntropy((f) => !f)
+    setEntropy((e) => !e)
   }
 
   const handleReset = () => {
@@ -37,7 +37,7 @@ export const ViolateCausality = () => {
     violateCausality(initOrder(DIMENSION))
   }
 
-  const extinct = order.every((row) => row.every((cell) => cell === OFF))
+  const extinct = order.every((row) => row.every((charge) => charge === OFF))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) setEntropy(false)
