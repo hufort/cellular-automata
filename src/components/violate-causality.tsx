@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 import { useEntropy, usePhysics } from "../hooks"
-import { initOrder } from "../utils"
+import { initField } from "../utils"
 import { DIMENSION, OFF } from "../constants"
 import { FieldState } from "../types"
 import "./violate-causality.css"
@@ -21,7 +21,7 @@ export const ViolateCausality = () => {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
-      violateCausality(initOrder(DIMENSION))
+      violateCausality(initField(DIMENSION))
     }
   }
 
@@ -34,7 +34,7 @@ export const ViolateCausality = () => {
   const handleClear = () => {
     setEntropy(false)
     snapshots.current = []
-    violateCausality(initOrder(DIMENSION))
+    violateCausality(initField(DIMENSION))
   }
 
   const extinct = field.every((row) => row.every((charge) => charge === OFF))
