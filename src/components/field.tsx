@@ -7,8 +7,8 @@ export const Field = ({ children }: { children: React.ReactNode }) => (
   <div
     className="field"
     style={{
-      gridTemplateColumns: `repeat(${DIMENSION}, 1rem)`,
-      gridTemplateRows: `repeat(${DIMENSION}, 1rem)`,
+      gridTemplateColumns: `repeat(${DIMENSION}, .5rem)`,
+      gridTemplateRows: `repeat(${DIMENSION}, .5rem)`,
     }}
   >
     {children}
