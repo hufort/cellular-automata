@@ -2,16 +2,16 @@ import { useRef, useEffect } from "react"
 import { useEntropy, usePhysics } from "../hooks"
 import { initOrder } from "../utils"
 import { DIMENSION, OFF } from "../constants"
-import { Order } from "../types"
+import { FieldState } from "../types"
 import "./violate-causality.css"
 
 export const ViolateCausality = () => {
-  const { order, transition, violateCausality } = usePhysics()
+  const { field, transition, violateCausality } = usePhysics()
   const { entropy, setEntropy } = useEntropy()
-  const snapshots = useRef<Order[]>([])
+  const snapshots = useRef<FieldState[]>([])
 
   const toggleEntropy = () => {
-    if (!entropy) snapshots.current.push(order)
+    if (!entropy) snapshots.current.push(field)
     setEntropy((e) => !e)
   }
 
@@ -27,7 +27,7 @@ export const ViolateCausality = () => {
 
   const handleTick = () => {
     setEntropy(false)
-    snapshots.current.push(order)
+    snapshots.current.push(field)
     transition()
   }
 
@@ -37,7 +37,7 @@ export const ViolateCausality = () => {
     violateCausality(initOrder(DIMENSION))
   }
 
-  const extinct = order.every((row) => row.every((charge) => charge === OFF))
+  const extinct = field.every((row) => row.every((charge) => charge === OFF))
 
   useEffect(() => {
     if (extinct && snapshots.current.length > 0) setEntropy(false)
