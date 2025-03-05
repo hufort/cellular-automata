@@ -4,7 +4,7 @@ import "./universe.css"
 
 export default function Universe() {
   return (
-    <div className="universe cmbr">
+    <div className="universe CMBR">
       <Title />
       <PhysicsProvider>
         <EntropyProvider>
