@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react"
-import { useEntropy, usePhysics } from "../hooks"
+import { useEntropy, usePhysics } from "../contexts"
 import { initField } from "../utils"
 import { DIMENSION, OFF } from "../constants"
 import { FieldState } from "../types"

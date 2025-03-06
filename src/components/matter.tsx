@@ -1,5 +1,5 @@
 import { Particle } from "./particle"
-import { usePhysics } from "../hooks"
+import { usePhysics } from "../contexts"
 
 export const Matter = () => {
   const { field, violateCausality } = usePhysics()
