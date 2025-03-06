@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, useContext } from "react"
 
 export interface Entropy {
   entropy: boolean
@@ -6,3 +6,11 @@ export interface Entropy {
 }
 
 export const EntropyContext = createContext<Entropy | null>(null)
+
+export const useEntropy = (): Entropy => {
+  const context = useContext(EntropyContext)
+  if (context === null) {
+    throw new Error("useEntropy must be used within an EntropyProvider")
+  }
+  return context
+}
