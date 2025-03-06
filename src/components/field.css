@@ -9,4 +9,5 @@
   background: var(--color-bg-base);
   box-shadow: var(--elevation-low);
   border-radius: 2px;
+  z-index: 1;
 }
