@@ -26,7 +26,7 @@
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
   opacity: 0.1;
   pointer-events: none;
-  z-index: 10;
+  z-index: 1;
   -webkit-animation: noise 1s steps(2) infinite;
   animation: noise 1s steps(2) infinite;
 }
