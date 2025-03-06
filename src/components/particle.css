@@ -1,20 +1,19 @@
 .particle {
   appearance: none;
   border: none;
-  background: var(--color-bg-base);
-  cursor: cell;
+  background: transparent;
+  cursor: pointer;
   outline: none;
   padding: 0;
   width: 100%;
   height: 100%;
-  border-radius: 1px;
+  border-radius: 2px;
   position: relative;
   transition: all 30ms ease-in-out;
 }
 
 .particle:hover {
   background: var(--color-bg-elevated);
-  transform: translateZ(0);
 }
 
 .particle.on {

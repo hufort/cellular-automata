@@ -3,11 +3,23 @@
   max-width: calc(100vw - 2rem);
   max-height: calc(100vw - 2rem);
   overflow: auto;
+  cursor: pointer; /* prevents cursor from flickering between particles */
   display: grid;
   gap: 1px;
-  padding: 0.15rem;
-  background: var(--color-bg-base);
-  box-shadow: var(--elevation-low);
-  border-radius: 2px;
+  padding: 4px;
+  background: var(--color-bg-surface);
+  border-style: solid;
+  border-color: var(--border-low);
+  border-width: 1px 0.5px 0.5px 1px;
+  border-radius: 8px;
+  opacity: 0.6;
   z-index: 1;
+}
+
+@media (prefers-color-scheme: light) {
+  .field {
+    border-width: 0.5px 1px 1px 0.5px;
+    box-shadow: var(--elevation-low);
+    opacity: 0.8;
+  }
 }
