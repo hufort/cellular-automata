@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { ON, OFF, DIMENSION } from "../constants"
-import { FieldState } from "../types"
+import { ON, OFF } from "../constants"
 import { initField } from "../utils"
+import { FieldState } from "../types"
 import { Physics } from "../contexts"
 
 export const useInitialConditions = (dimension: number): Physics => {
@@ -11,9 +11,11 @@ export const useInitialConditions = (dimension: number): Physics => {
     setField((field) =>
       field.map((row, y) =>
         row.map((charge, x) => {
-          const observed = observe(y, x, field)
-          if (charge === OFF && observed === 3) return ON
-          if (charge === ON && (observed < 2 || observed > 3)) return OFF
+          const self = { y, x }
+          const interactions = interact(self, field, dimension)
+          if (charge === ON && interactions < 2) return OFF
+          if (charge === ON && interactions > 3) return OFF
+          if (charge === OFF && interactions === 3) return ON
           return charge
         })
       )
@@ -22,18 +24,22 @@ export const useInitialConditions = (dimension: number): Physics => {
   return { field, transition, violateCausality: setField }
 }
 
-const observe = (y: number, x: number, field: FieldState): number =>
+const interact = (
+  self: { y: number; x: number },
+  field: FieldState,
+  dimension: number
+): number =>
   // prettier-ignore
   [
     [-1, -1], [-1, 0], [-1, 1],
-    [ 0, -1], /*y,x*/  [ 0, 1],
+    [ 0, -1], /*self*/ [ 0, 1],
     [ 1, -1], [ 1, 0], [ 1, 1],
-  ].reduce((acc, [ox, oy]) => {
-    const oY = y + oy
-    const oX = x + ox
-    const inD1 = oY >= 0 && oY < DIMENSION
-    const inD2 = oX >= 0 && oX < DIMENSION
+  ].reduce((acc, [offsetY, offsetX]) => {
+    const otherY = self.y + offsetY
+    const otherX = self.x + offsetX
+    const inD1 = otherY >= 0 && otherY < dimension
+    const inD2 = otherX >= 0 && otherX < dimension
     const inSpace = inD1 && inD2
-    const oCharge = inSpace ? field[oY][oX] : null
-    return acc + (oCharge || 0)
+    const otherCharge = inSpace ? field[otherY][otherX] : OFF
+    return acc + otherCharge
   }, 0)
