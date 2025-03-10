@@ -3,3 +3,5 @@ import { FieldState } from "./types"
 
 export const initField = (dimension: number): FieldState =>
   Array.from({ length: dimension }, () => new Array(dimension).fill(OFF))
+
+export const getDimension = (field: FieldState): number => field.length
