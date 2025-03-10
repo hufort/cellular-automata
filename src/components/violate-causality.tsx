@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react"
 import { useEntropy, usePhysics } from "../contexts"
-import { initField } from "../utils"
-import { DIMENSION, OFF } from "../constants"
+import { getDimension, initField } from "../utils"
+import { OFF } from "../constants"
 import { FieldState } from "../types"
 import "./violate-causality.css"
 
@@ -9,6 +9,7 @@ export const ViolateCausality = () => {
   const { field, transition, violateCausality } = usePhysics()
   const { entropy, setEntropy } = useEntropy()
   const snapshots = useRef<FieldState[]>([])
+  const dimension = getDimension(field)
 
   const toggleEntropy = () => {
     if (!entropy) snapshots.current.push(field)
@@ -21,7 +22,7 @@ export const ViolateCausality = () => {
       const previousSpace = snapshots.current.pop()
       previousSpace && violateCausality(previousSpace)
     } else {
-      violateCausality(initField(DIMENSION))
+      violateCausality(initField(dimension))
     }
   }
 
@@ -34,7 +35,7 @@ export const ViolateCausality = () => {
   const handleClear = () => {
     setEntropy(false)
     snapshots.current = []
-    violateCausality(initField(DIMENSION))
+    violateCausality(initField(dimension))
   }
 
   const extinct = field.every((row) => row.every((charge) => charge === OFF))
