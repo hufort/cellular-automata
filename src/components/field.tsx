@@ -1,15 +1,21 @@
 import React from "react"
-import { DIMENSION } from "../constants"
+import { usePhysics } from "../contexts"
+import { getDimension } from "../utils"
 import "./field.css"
 
-export const Field = ({ children }: { children: React.ReactNode }) => (
-  <div
-    className="field"
-    style={{
-      gridTemplateColumns: `repeat(${DIMENSION}, .5rem)`,
-      gridTemplateRows: `repeat(${DIMENSION}, .5rem)`,
-    }}
-  >
-    {children}
-  </div>
-)
+export const Field = ({ children }: { children: React.ReactNode }) => {
+  const { field } = usePhysics()
+  const dimension = getDimension(field)
+
+  return (
+    <div
+      className="field"
+      style={{
+        gridTemplateColumns: `repeat(${dimension}, .5rem)`,
+        gridTemplateRows: `repeat(${dimension}, .5rem)`,
+      }}
+    >
+      {children}
+    </div>
+  )
+}
