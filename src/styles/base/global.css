@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Arkitextura', monospace;
-  background: var(--color-bg-base);
+  font-family: "Arkitextura", monospace;
+  background: var(--color-bg-surface);
   color: var(--color-fg-base);
 }

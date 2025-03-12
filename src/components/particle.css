@@ -13,9 +13,9 @@
 }
 
 .particle:hover {
-  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-bg-elevated);
 }
 
 .particle.on {
-  background: var(--color-accent-base);
+  border: 1px solid var(--color-accent-base);
 }

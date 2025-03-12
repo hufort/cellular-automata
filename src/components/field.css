@@ -7,10 +7,11 @@
   display: grid;
   gap: 1px;
   padding: 4px;
-  background: var(--color-bg-surface);
-  border-style: solid;
+  /* background: var(--color-bg-surface); */
+  border-style: dotted;
   border-color: var(--border-low);
-  border-width: 1px 0.5px 0.5px 1px;
+  /* border-width: 1px 0.5px 0.5px 1px; */
+  border-width: 2px;
   border-radius: 8px;
   opacity: 0.6;
   z-index: 1;
