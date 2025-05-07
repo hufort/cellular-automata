@@ -1,7 +1,7 @@
 import { OFF, ON } from "../constants"
 import { Physics } from "../contexts"
 import { Charge } from "../types"
-import "./particle.css"
+import css from "./particle.module.css"
 
 export interface ParticleProperties {
   y: number
@@ -25,7 +25,7 @@ export const Particle = ({
 
   return (
     <button
-      className={`particle ${charge === ON ? "on" : "off"}`}
+      className={`${css["particle"]} ${charge === ON ? css["on"] : ""}`}
       onClick={toggleExistence}
     />
   )

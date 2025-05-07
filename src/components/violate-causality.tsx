@@ -3,7 +3,7 @@ import { useEntropy, usePhysics } from "../contexts"
 import { getDimension, initField } from "../utils"
 import { OFF } from "../constants"
 import { FieldState } from "../types"
-import "./violate-causality.css"
+import css from "./violate-causality.module.css"
 
 export const ViolateCausality = () => {
   const { field, transition, violateCausality } = usePhysics()
@@ -45,20 +45,33 @@ export const ViolateCausality = () => {
   }, [extinct, snapshots, setEntropy])
 
   return (
-    <div className="violate-causality">
-      <button disabled={extinct} onClick={toggleEntropy}>
+    <div className={css["violate-causality"]}>
+      <button
+        className={css["violate-causality__control"]}
+        disabled={extinct}
+        onClick={toggleEntropy}
+      >
         {entropy ? "stop" : "start"}
       </button>
-      <button disabled={extinct} onClick={handleTick}>
+      <button
+        className={css["violate-causality__control"]}
+        disabled={extinct}
+        onClick={handleTick}
+      >
         tick
       </button>
       <button
+        className={css["violate-causality__control"]}
         disabled={extinct && snapshots.current.length === 0}
         onClick={handleReset}
       >
         reset
       </button>
-      <button disabled={extinct} onClick={handleClear}>
+      <button
+        className={css["violate-causality__control"]}
+        disabled={extinct}
+        onClick={handleClear}
+      >
         clear
       </button>
     </div>

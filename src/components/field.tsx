@@ -1,7 +1,7 @@
 import React from "react"
 import { usePhysics } from "../contexts"
 import { getDimension } from "../utils"
-import "./field.css"
+import css from "./field.module.css"
 
 export const Field = ({ children }: { children: React.ReactNode }) => {
   const { field } = usePhysics()
@@ -9,7 +9,7 @@ export const Field = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div
-      className="field"
+      className={css["field"]}
       style={{
         gridTemplateColumns: `repeat(${dimension}, .5rem)`,
         gridTemplateRows: `repeat(${dimension}, .5rem)`,

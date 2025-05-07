@@ -3,7 +3,7 @@
   gap: 8px;
 }
 
-.violate-causality button {
+.violate-causality__control {
   appearance: none;
   background: transparent;
   border: none;
@@ -19,16 +19,16 @@
   min-width: 56px;
 }
 
-.violate-causality button:hover {
+.violate-causality__control:hover {
   background: var(--color-interactive-hover);
 }
 
-.violate-causality button:active {
+.violate-causality__control:active {
   background: var(--color-interactive-active);
   transform: translateY(1px);
 }
 
-.violate-causality button:disabled {
+.violate-causality__control:disabled {
   background: none;
   color: var(--color-fg-muted);
   cursor: not-allowed;

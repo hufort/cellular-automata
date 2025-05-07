@@ -16,6 +16,10 @@
   background: var(--color-bg-elevated);
 }
 
-.particle.on {
+.on {
   background: var(--color-accent-base);
+}
+
+.on:hover {
+  background: var(--color-accent-hover);
 }
