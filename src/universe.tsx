@@ -1,10 +1,10 @@
 import { EntropyProvider, PhysicsProvider } from "./contexts"
 import { ViolateCausality, Field, Matter, Title } from "./components"
-import "./universe.css"
+import css from "./universe.module.css"
 
 export default function Universe() {
   return (
-    <div className="universe CMBR">
+    <div className={`${css["universe"]} ${css["CMBR"]}`}>
       <Title />
       <PhysicsProvider>
         <EntropyProvider>
