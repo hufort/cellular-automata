@@ -1,21 +1,17 @@
 import { OFF, ON } from "../constants"
-import { Physics } from "../contexts"
+import { usePhysics } from "../contexts"
 import { Charge } from "../types"
 import css from "./particle.module.css"
 
 export interface ParticleProperties {
-  y: number
-  x: number
   charge: Charge
-  violateCausality: Physics["violateCausality"]
+  x: number
+  y: number
 }
 
-export const Particle = ({
-  y,
-  x,
-  charge,
-  violateCausality,
-}: ParticleProperties) => {
+export const Particle = ({ charge, x, y }: ParticleProperties) => {
+  const { violateCausality } = usePhysics()
+
   const toggleExistence = () =>
     violateCausality((currentField) => {
       const nextField = [...currentField]
