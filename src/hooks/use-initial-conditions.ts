@@ -12,7 +12,7 @@ export const useInitialConditions = (dimension: number): Physics => {
       field.map((row, y) =>
         row.map((charge, x) => {
           const self = { y, x }
-          const interactions = interact(self, field, dimension)
+          const interactions = observe(self, field, dimension)
           if (charge === ON && interactions < 2) return OFF
           if (charge === ON && interactions > 3) return OFF
           if (charge === OFF && interactions === 3) return ON
@@ -24,7 +24,7 @@ export const useInitialConditions = (dimension: number): Physics => {
   return { field, transition, violateCausality: setField }
 }
 
-const interact = (
+const observe = (
   self: { y: number; x: number },
   field: FieldState,
   dimension: number
