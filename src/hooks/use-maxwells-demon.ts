@@ -8,14 +8,14 @@ import { Physics } from "../contexts"
 The compute function unifies two types of entropy. 
 
 * When information entropy moves from 1 state to the next:
-* observation occurs — observe  function
+* observation occurs — observe function
 * information is computed — transition function
 * memory is updated[1] (erased/written) - setField(field => nextField)
 
 [1] Even if we were to store past states, that would still require 
 energy. Moving backwards to the previous state would not reverse time.
 It would increase entropy by reading past information in order to 
-render the next  state configuration — even if it's one "known" from 
+render the next state configuration — even if it's one "known" from 
 the past — it still  has to compute its current state.
 
 So, there is literal heat generated in the physical universe when the

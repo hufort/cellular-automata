@@ -5,7 +5,7 @@ import { usePhysics } from "./physics-context"
 
 export const EntropyProvider = ({ children }: { children: ReactNode }) => {
   const { transition } = usePhysics()
-  // works as an interface for polymorphic entropy — physical and informational
+
   const [entropy, setEntropy] = useMaxwellsDemon(transition)
 
   const value = { entropy, setEntropy }
