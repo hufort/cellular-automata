@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ON, OFF } from "../constants"
 import { initField } from "../utils"
-import { FieldState } from "../types"
+import { Charge, FieldState } from "../types"
 import { Physics } from "../contexts"
 
 export const useInitialConditions = (dimension: number): Physics => {
@@ -9,14 +9,11 @@ export const useInitialConditions = (dimension: number): Physics => {
 
   const transition = () =>
     setField((field) =>
-      field.map((row, y) =>
-        row.map((charge, x) => {
-          const self = { y, x }
+      field.map((column, y) =>
+        column.map((charge, x) => {
+          const self = { x, y }
           const interactions = observe(self, field, dimension)
-          if (charge === ON && interactions < 2) return OFF
-          if (charge === ON && interactions > 3) return OFF
-          if (charge === OFF && interactions === 3) return ON
-          return charge
+          return evaluate(charge, interactions)
         })
       )
     )
@@ -25,21 +22,28 @@ export const useInitialConditions = (dimension: number): Physics => {
 }
 
 const observe = (
-  self: { y: number; x: number },
+  self: { x: number; y: number },
   field: FieldState,
   dimension: number
 ): number =>
   // prettier-ignore
   [
-    [-1, -1], [-1, 0], [-1, 1],
-    [ 0, -1], /*self*/ [ 0, 1],
-    [ 1, -1], [ 1, 0], [ 1, 1],
-  ].reduce((acc, [offsetY, offsetX]) => {
-    const otherY = self.y + offsetY
+    [-1, -1], [0, -1], [ 1, -1],
+    [-1,  0], /*self*/ [ 1,  0],
+    [-1,  1], [ 0, 1], [ 1,  1],
+  ].reduce((acc, [offsetX, offsetY]) => {
     const otherX = self.x + offsetX
-    const inD1 = otherY >= 0 && otherY < dimension
-    const inD2 = otherX >= 0 && otherX < dimension
+    const otherY = self.y + offsetY
+    const inD1 = otherX >= 0 && otherX < dimension
+    const inD2 = otherY >= 0 && otherY < dimension
     const inSpace = inD1 && inD2
-    const otherCharge = inSpace ? field[otherY][otherX] : OFF
+    const otherCharge = inSpace ? field[otherX][otherY] : OFF
     return acc + otherCharge
   }, 0)
+
+const evaluate = (charge: Charge, interactions: number): Charge => {
+  if (charge === ON && interactions < 2) return OFF
+  if (charge === ON && interactions > 3) return OFF
+  if (charge === OFF && interactions === 3) return ON
+  return charge
+}
