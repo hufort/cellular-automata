@@ -37,7 +37,7 @@ const observe = (
     const inD1 = otherX >= 0 && otherX < dimension
     const inD2 = otherY >= 0 && otherY < dimension
     const inSpace = inD1 && inD2
-    const otherCharge = inSpace ? field[otherX][otherY] : OFF
+    const otherCharge = inSpace ? field[otherY][otherX] : OFF
     return acc + otherCharge
   }, 0)
 
