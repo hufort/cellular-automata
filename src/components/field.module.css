@@ -23,3 +23,16 @@
     opacity: 0.8;
   }
 }
+
+.extended {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  border-radius: 0;
+  border-width: 0;
+  box-shadow: none;
+  padding: 0;
+  opacity: 1;
+}
