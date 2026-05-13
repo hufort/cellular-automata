@@ -4,11 +4,11 @@ import { getUrlInitialConditions } from "./url-parameters"
 import css from "./embedded-universe.module.css"
 
 export default function EmbeddedUniverse() {
-  const { dimension, on } = getUrlInitialConditions()
+  const { dimension, excitations } = getUrlInitialConditions()
 
   return (
     <div className={css["embedded-universe"]}>
-      <PhysicsProvider dimension={dimension} on={on}>
+      <PhysicsProvider dimension={dimension} excitations={excitations}>
         <EntropyProvider>
           <Field extended>
             <Matter />

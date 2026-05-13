@@ -1,9 +1,9 @@
 import { DIMENSION } from "./constants"
-import { Coordinate } from "./types"
+import { Excitation } from "./types"
 
 interface UrlInitialConditions {
   dimension: number
-  on: Coordinate[]
+  excitations: Excitation[]
 }
 
 export const isEmbedded = (search = window.location.search): boolean => {
@@ -16,9 +16,9 @@ export const getUrlInitialConditions = (
 ): UrlInitialConditions => {
   const params = new URLSearchParams(search)
   const dimension = parseDimension(params.get("dimension"))
-  const on = parseOn(params.get("on"), dimension)
+  const excitations = parseExcitations(params.get("excitations"), dimension)
 
-  return { dimension, on }
+  return { dimension, excitations }
 }
 
 const parseDimension = (value: string | null): number => {
@@ -27,7 +27,10 @@ const parseDimension = (value: string | null): number => {
   return validDimension ? dimension : DIMENSION
 }
 
-const parseOn = (value: string | null, dimension: number): Coordinate[] => {
+const parseExcitations = (
+  value: string | null,
+  dimension: number
+): Excitation[] => {
   if (value === null || value.trim() === "" || value.trim() === "[]") return []
 
   return value.split(";").flatMap((point) => {
