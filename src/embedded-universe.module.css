@@ -1,0 +1,30 @@
+.embedded-universe {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg-base);
+}
+
+.floating-toolbar {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  z-index: 2;
+  transform: translateX(-50%);
+  padding: 4px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-bg-base) 78%, transparent);
+  backdrop-filter: blur(8px);
+  transition: opacity 180ms ease;
+}
+
+.floating-toolbar--running {
+  opacity: 0.16;
+}
+
+.floating-toolbar--running:hover,
+.floating-toolbar--running:focus-within {
+  opacity: 1;
+}
