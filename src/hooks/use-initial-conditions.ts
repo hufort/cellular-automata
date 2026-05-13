@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { ON, OFF } from "../constants"
 import { initField } from "../utils"
-import { Charge, FieldState } from "../types"
+import { Charge, Excitation, FieldState } from "../types"
 import { Physics } from "../contexts"
 
-export const useInitialConditions = (dimension: number): Physics => {
-  const [field, setField] = useState(() => initField(dimension))
+export const useInitialConditions = (
+  dimension: number,
+  excitations: Excitation[] = []
+): Physics => {
+  const [field, setField] = useState(() => initField(dimension, excitations))
 
   const transition = () =>
     setField((field) =>

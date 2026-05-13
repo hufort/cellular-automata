@@ -1,10 +1,21 @@
 import { ReactNode } from "react"
 import { DIMENSION } from "../constants"
 import { useInitialConditions } from "../hooks"
+import { Excitation } from "../types"
 import { PhysicsContext } from "./physics-context"
 
-export const PhysicsProvider = ({ children }: { children: ReactNode }) => {
-  const physics = useInitialConditions(DIMENSION)
+interface PhysicsProviderProperties {
+  children: ReactNode
+  dimension?: number
+  excitations?: Excitation[]
+}
+
+export const PhysicsProvider = ({
+  children,
+  dimension = DIMENSION,
+  excitations = [],
+}: PhysicsProviderProperties) => {
+  const physics = useInitialConditions(dimension, excitations)
 
   return (
     <PhysicsContext.Provider value={physics}>
